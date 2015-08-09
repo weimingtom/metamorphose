@@ -1,0 +1,5 @@
+二、核心hack
+	加入断点在以下位置
+	符号切割：Sytax.llex()或者StringBuffer.append()
+	语义：Sytax.statement()
+	虚拟机循环：Lua.vmExecute()
