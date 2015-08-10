@@ -1,5 +1,13 @@
 package com.iteye.weimingtom.metamorphose.launcher
 {
+	import com.iteye.weimingtom.metamorphose.lua.BaseLib;
+	import com.iteye.weimingtom.metamorphose.lua.Lua;
+	import com.iteye.weimingtom.metamorphose.lua.MathLib;
+	import com.iteye.weimingtom.metamorphose.lua.OSLib;
+	import com.iteye.weimingtom.metamorphose.lua.PackageLib;
+	import com.iteye.weimingtom.metamorphose.lua.StringLib;
+	import com.iteye.weimingtom.metamorphose.lua.TableLib;
+	
 	import flash.display.MovieClip;
 	import flash.events.KeyboardEvent;
 	import flash.text.TextField;
@@ -7,13 +15,12 @@ package com.iteye.weimingtom.metamorphose.launcher
 	import flash.text.TextFieldType;
 	import flash.text.TextFormat;
 	
-	import com.iteye.weimingtom.metamorphose.lua.Lua;
-	
 	[SWF(width=640, height = 520)]
 	public class Launcher extends MovieClip
 	{
 		private var _format:TextFormat = new TextFormat();
 		private var _formatPre:TextFormat = new TextFormat();
+		private var _formatOutput:TextFormat = new TextFormat();
 		private var _tfOutput:TextField = new TextField();
 		private var _tfInput:TextField = new TextField();
 		private var _tfInputPre:TextField = new TextField();
@@ -21,9 +28,17 @@ package com.iteye.weimingtom.metamorphose.launcher
 		private var _nHistoryIndex:int = 0;
 		
 		private var _L:Lua = null;
+		private const _isLoadLib:Boolean = true;
 		
 		public function Launcher()
 		{			
+			with(_formatOutput)
+			{
+				font = "宋体";
+				size = 20;
+				bold = true;
+				leftMargin = 0;
+			}
 			with(_tfOutput)
 			{
 				x = 0;
@@ -36,18 +51,49 @@ package com.iteye.weimingtom.metamorphose.launcher
 				multiline = true;
 				wordWrap = true;
 				restrict = "";
+				defaultTextFormat = _formatOutput;
 				
 				selectable = true;
 				type = TextFieldType.DYNAMIC;
 			}
 			this.addChild(_tfOutput);
 			
+			
+			with(_format)
+			{
+				font = "宋体";
+				color = 0x00FF00;
+				bold = true;
+				size = 20;
+				leftMargin = 20;
+			}
+			
+			with(_tfInput)
+			{
+				x = 0;
+				y = _tfOutput.height;
+				width = 640;
+				height = 50;
+				restrict = null;
+				multiline = false;
+				wordWrap = false;
+				border = true;
+				background = true;
+				backgroundColor = 0x000000;//0xFFFFFF;
+				//borderColor = 0xCC0000;
+				autoSize = TextFieldAutoSize.NONE; //不要调整大小
+				type = TextFieldType.INPUT;
+				defaultTextFormat = _format;
+			}
+			this.addChild(_tfInput);
+			this.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeydown);
+			
 			with(_formatPre)
 			{
 				font = "宋体";
-				color = 0xFF0000;
-				size = 20;
+				color = 0x00FF00;
 				bold = true;
+				size = 20;
 				leftMargin = 0;
 			}
 			with(_tfInputPre)
@@ -58,6 +104,8 @@ package com.iteye.weimingtom.metamorphose.launcher
 				multiline = false;
 				wordWrap = false;
 				border = false;
+				background = true;
+				backgroundColor = 0x000000;//0xFFFFFF;
 				autoSize = TextFieldAutoSize.LEFT;
 				type = TextFieldType.DYNAMIC;
 				defaultTextFormat = _formatPre;
@@ -65,37 +113,20 @@ package com.iteye.weimingtom.metamorphose.launcher
 			}
 			this.addChild(_tfInputPre);
 			
+			_tfInput.appendText("return 1 + 1");
+			stage.focus = _tfInput;
 			
-			with(_format)
-			{
-				font = "宋体";
-				color = 0xFF0000;
-				bold = true;
-				size = 20;
-				leftMargin = 10;
-			}
-			with(_tfInput)
-			{
-				x = 0;
-				y = _tfOutput.height;
-				width = 640;
-				height = 30;
-				restrict = null;
-				multiline = false;
-				wordWrap = false;
-				border = true;
-				borderColor = 0xCC0000;
-				autoSize = TextFieldAutoSize.NONE; //不要调整大小
-				type = TextFieldType.INPUT;
-				defaultTextFormat = _format;
-			}
-			this.addChild(_tfInput);
-			this.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeydown);
-			
-			_tfInput.appendText("input");
-			log("Welcome to Lua world!");
+			log(Lua.RELEASE + "  " + Lua.COPYRIGHT);
 			
 			_L = new Lua();
+			if (_isLoadLib) {
+				BaseLib.open(_L);
+				PackageLib.open(_L);
+				MathLib.open(_L);
+				OSLib.open(_L);
+				StringLib.open(_L);
+				TableLib.open(_L);
+			}
 		}
 		
 		private function onKeydown(event:KeyboardEvent):void
@@ -105,7 +136,7 @@ package com.iteye.weimingtom.metamorphose.launcher
 			switch(event.keyCode)
 			{
 				case 13: // Enter
-					log(">" + _tfInput.text);
+					log("> " + _tfInput.text);
 					_arrHistory.push(_tfInput.text);
 					_nHistoryIndex = _arrHistory.length;
 					execute(_tfInput.text);
@@ -157,7 +188,13 @@ package com.iteye.weimingtom.metamorphose.launcher
 			if (res == 0)
 			{
 				var obj:Object = _L.value(1);
-				log(String(obj));
+//				log(String(obj));
+				var tostring:Object = _L.getGlobal("tostring");
+				_L.pushObject(tostring);
+				_L.pushObject(obj);
+				_L.call(1, 1);
+				var resultStr:String = _L.toString(_L.value(-1));
+				log(resultStr);
 			}
 			else
 			{
