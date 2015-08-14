@@ -41,7 +41,8 @@ public final class TableLib extends LuaJavaCallback
   private static final int MAXN = 3;
   private static final int REMOVE = 4;
   private static final int SORT = 5;
-
+  private static final int GETN = 6;
+  
   /**
    * Which library function this object represents.  This value should
    * be one of the "enums" defined in the class.
@@ -74,6 +75,10 @@ public final class TableLib extends LuaJavaCallback
         return remove(L);
       case SORT:
         return sort(L);
+        
+        //FIXME: added
+      case GETN:
+    	return getn(L);
     }
     return 0;
   }
@@ -90,6 +95,7 @@ public final class TableLib extends LuaJavaCallback
 
     r(L, "concat", CONCAT);
     r(L, "insert", INSERT);
+    r(L, "getn", GETN); //FIXME: added
     r(L, "maxn", MAXN);
     r(L, "remove", REMOVE);
     r(L, "sort", SORT);
@@ -322,4 +328,11 @@ public final class TableLib extends LuaJavaCallback
     LuaTable t = (LuaTable)L.value(n);
     return t.getn();
   }
+  
+  
+//FIXME: added
+   private static int getn(Lua L) {
+	  L.pushNumber(aux_getn(L, 1));
+	  return 1;
+   }
 }

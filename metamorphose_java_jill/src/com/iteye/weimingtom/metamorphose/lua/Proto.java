@@ -223,7 +223,7 @@ final class Proto
   /** Append instruction. */
   void codeAppend(Lua L, int pc, int instruction, int line)
   {
-	  System.out.println("pc:" + pc + 
+	  System.err.println("pc:" + pc + 
 			  ", instruction:" + instruction + 
 			  ", line:" + line + 
 			  ", lineinfo.length:" + lineinfo.length);

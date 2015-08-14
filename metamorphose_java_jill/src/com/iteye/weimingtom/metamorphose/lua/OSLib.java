@@ -46,7 +46,7 @@ public final class OSLib extends LuaJavaCallback
   private static final int DIFFTIME = 3;
   // EXECUTE = 4;
   // EXIT = 5;
-  // GETENV = 6;
+  private static final int GETENV = 6; //FIXME:added
   // REMOVE = 7;
   // RENAME = 8;
   private static final int SETLOCALE = 9;
@@ -80,6 +80,8 @@ public final class OSLib extends LuaJavaCallback
         return date(L);
       case DIFFTIME:
         return difftime(L);
+      case GETENV: //FIXME:
+    	return getenv(L);
       case SETLOCALE:
         return setlocale(L);
       case TIME:
@@ -100,6 +102,7 @@ public final class OSLib extends LuaJavaCallback
     r(L, "clock", CLOCK);
     r(L, "date", DATE);
     r(L, "difftime", DIFFTIME);
+    r(L, "getenv", GETENV);//FIXME:added
     r(L, "setlocale", SETLOCALE);
     r(L, "time", TIME);
   }
@@ -210,6 +213,8 @@ public final class OSLib extends LuaJavaCallback
             break;
           case 'c':
             b.append(c.getTime().toString());
+            //FIXME:should be this
+            //b.append(String.format("%tc", c));
             break;
           case 'd':
             b.append(format(c.get(Calendar.DAY_OF_MONTH), 2));
@@ -439,5 +444,19 @@ public final class OSLib extends LuaJavaCallback
       }
     }
     return w;
+  }
+  
+  
+  //FIXME:added
+  private static int getenv(Lua L)
+  {
+	String name = L.checkString(1);
+	String value = System.getenv(name);
+	if (value == null) {
+		L.pushNil();
+	} else {
+		L.pushString(value);
+	}
+    return 1;
   }
 }

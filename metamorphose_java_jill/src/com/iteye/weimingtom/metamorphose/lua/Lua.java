@@ -1520,7 +1520,7 @@ protect:
     {
       return NIL;
     }
-    System.out.println("value:"+idx);
+    System.err.println("value:"+idx);
     return stack[idx].asObject();
   }
 
@@ -2301,12 +2301,12 @@ protect:
     switch (errcode)
     {
       case ERRMEM:
-    	  System.out.println("dSeterrorobj:" + oldtop);
+    	  System.err.println("dSeterrorobj:" + oldtop);
         stack[oldtop].r = MEMERRMSG;
         break;
 
       case ERRERR:
-    	  System.out.println("dSeterrorobj:" + oldtop);
+    	  System.err.println("dSeterrorobj:" + oldtop);
         stack[oldtop].r = "error in error handling";
         break;
 
@@ -2744,10 +2744,10 @@ protect:
 	  
     if (ISK(field))
     {
-    	System.out.println("RK:" + field);
+    	System.err.println("RK:" + field);
       return k[field & 0xff];
     }
-    System.out.println("RK:" + (base + field));
+    System.err.println("RK:" + (base + field));
     return stack[base + field];
   }
 
@@ -2879,7 +2879,7 @@ protect:
       int n = 2;  // number of elements handled in this pass (at least 2)
       if (!tostring(top-2)|| !tostring(top-1))
       {
-    	  System.out.println("vmConcat:" + (top-2) + "," + (top-1));
+    	  System.err.println("vmConcat:" + (top-2) + "," + (top-1));
         if (!call_binTM(stack[top-2], stack[top-1],
             stack[top-2], "__concat"))
         {
@@ -3733,7 +3733,7 @@ reentry:
     // result first is always correct.
     while (i != 0 && firstResult < top)
     {
-    	System.out.println("vmPoscall:" + res);
+    	System.err.println("vmPoscall:" + res);
       stack[res].r = stack[firstResult].r;
       stack[res].d = stack[firstResult].d;
       ++res;
@@ -3763,7 +3763,7 @@ reentry:
   private int vmPrecall(int func, int r)
   {
     Object faso;        // Function AS Object
-    System.out.println("vmPrecall:" + func);
+    System.err.println("vmPrecall:" + func);
     faso = stack[func].r;
     if (!isFunction(faso))
     {
@@ -3818,6 +3818,7 @@ reentry:
       }
       catch (RuntimeException e)
       {
+    	  e.printStackTrace(); //FIXME: added
         yield(0);
         throw e;
       }
@@ -3989,7 +3990,7 @@ reentry:
     push(p1);
     push(p2);
     vmCall(stackSize-3, 1);
-    System.out.println("callTMres:" +(stackSize - 1));
+    System.err.println("callTMres:" +(stackSize - 1));
     res.r = stack[stackSize-1].r;
     res.d = stack[stackSize-1].d;
     pop(1);
@@ -4006,7 +4007,7 @@ reentry:
     push(p1);
     push(p2);
     vmCall(stackSize-3, 1);
-    System.out.println("callTMres" + (stackSize - 1));
+    System.err.println("callTMres" + (stackSize - 1));
     res.r = stack[stackSize-1].r;
     res.d = stack[stackSize-1].d;
     pop(1);
@@ -4074,7 +4075,7 @@ reentry:
   private void stacksetsize(int n)
   {
 	  if(n == 3)
-		  System.out.println("stacksetsize:"+n);
+		  System.err.println("stacksetsize:"+n);
     // It is absolutely critical that when the stack changes sizes those
     // elements that are common to both old and new stack are unchanged.
 
@@ -4133,7 +4134,7 @@ reentry:
   {
     int i = stackSize;
     stacksetsize(i+1);
-	  System.out.println("stackAdd:"+i);
+	  System.err.println("stackAdd:"+i);
     stack[i].setObject(o);
   }
 
@@ -4144,7 +4145,7 @@ reentry:
   {
     int i = stackSize;
     stacksetsize(i+1);
-    System.out.println("push:" + i);
+    System.err.println("push:" + i);
     stack[i].r = p.r;
     stack[i].d = p.d;
   }
@@ -4158,7 +4159,7 @@ reentry:
     // A loop from n to 1 copies n slots.
     for (int j=n; j>=1; --j)
     {
-    	System.out.println("stackInsertAt:" + (i+j));
+    	System.err.println("stackInsertAt:" + (i+j));
       stack[i+j].r = stack[i+j-1].r;
       stack[i+j].d = stack[i+j-1].d;
     }
@@ -4229,7 +4230,7 @@ reentry:
   {
     if (tonumber(stack[idx], NUMOP))
     {
-    	System.out.println("tonumber:"+idx);
+    	System.err.println("tonumber:"+idx);
       stack[idx].d = NUMOP[0];
       stack[idx].r = NUMBER;
       return true;
@@ -4272,7 +4273,7 @@ reentry:
     {
       return false;
     }
-    System.out.println("tostring:"+idx);
+    System.err.println("tostring:"+idx);
     stack[idx].r = s;
     return true;
   }
@@ -4283,7 +4284,7 @@ reentry:
    */
   private Object tryfuncTM(int func)
   {
-	  System.out.println("tryfuncTM:"+func);
+	  System.err.println("tryfuncTM:"+func);
     Object tm = tagmethod(stack[func].asObject(), "__call");
     if (!isFunction(tm))
     {
@@ -4352,7 +4353,7 @@ reentry:
   {
     if (o instanceof Double)
     {
-    	System.out.println("setObjectAt"+ idx);
+    	System.err.println("setObjectAt"+ idx);
       stack[idx].r = NUMBER;
       stack[idx].d = ((Double)o).doubleValue();
       return;
@@ -4566,7 +4567,7 @@ final class Slot
     {
       r = Lua.NUMBER;
       d = ((Double)o).doubleValue();
-  	System.out.println("Slot.setObject:" + d);
+  	System.err.println("Slot.setObject:" + d);
     }
   }
 }

@@ -1,7 +1,9 @@
 package com.iteye.weimingtom.metamorphose.test;
 
 import com.iteye.weimingtom.metamorphose.lua.BaseLib;
+import com.iteye.weimingtom.metamorphose.lua.IOLib;
 import com.iteye.weimingtom.metamorphose.lua.Lua;
+import com.iteye.weimingtom.metamorphose.lua.LuaTable;
 import com.iteye.weimingtom.metamorphose.lua.MathLib;
 import com.iteye.weimingtom.metamorphose.lua.OSLib;
 import com.iteye.weimingtom.metamorphose.lua.PackageLib;
@@ -21,8 +23,44 @@ public class Test001 {
 				"return n\n";
 		final String test002 = "return _VERSION";
 		final String test003 = "return nil";
-		
+		final String test004 = "io.write(\"Hello world, from \",_VERSION,\"!\\n\")";
+		final String test005 = "function printf(...)\n"+
+			" io.write(string.format(...))\n" + 
+			"end\n" +
+			"\n" +
+			"" +
+			//"printf(\"Hello %%s from %%s on %%s\\n\",os.getenv\"USER\" or \"there\",_VERSION,os.date())";
+			"printf(\"Hello %s from %s on %s\\n\",os.getenv\"USER\" or \"there\",_VERSION,os.date())";
+		final String test006 = "-- echo command line arguments\n" + 
+			"\n" +
+			"for i=0,table.getn(arg) do\n"+
+			" print(i,arg[i])\n"+
+			"end";
+		final String test007 = "-- read environment variables as if they were global variables\n"+
+			"\n"+
+			"local f=function (t,i) return os.getenv(i) end\n"+
+			"setmetatable(getfenv(),{__index=f})\n"+
+			"\n"+
+			"-- an example\n"+
+			"print(a,USER,PATH)\n";
+	
+		final String test008 = "-- example of for with generator functions\n"+
+			"\n"+
+			"function generatefib (n)\n"+
+			"  return coroutine.wrap(function ()\n"+
+			"    local a,b = 1, 1\n"+
+			"    while a <= n do\n"+
+			"      coroutine.yield(a)\n"+
+			"      a, b = b, a+b\n"+
+			"    end\n"+
+			"  end)\n"+
+			"end\n"+
+			"\n"+
+			"for i in generatefib(1000) do print(i) end\n";
+	
 		final boolean isLoadLib = true;
+		final boolean useArg = true;
+		final String[] argv = new String[]{"hello", "world"};
 		try {
 			Lua L = new Lua();
 			if (isLoadLib) {
@@ -32,8 +70,21 @@ public class Test001 {
 				OSLib.open(L);
 				StringLib.open(L);
 				TableLib.open(L);
+				IOLib.open(L);
 			}
-			int status = L.doString(test003);
+			if (useArg) {
+				//FIXME: index may be minus (for example, arg[-1], before script file name)
+				//@see http://www.ttlsa.com/lua/lua-install-and-lua-variable-ttlsa/
+				int narg = argv.length;
+				LuaTable tbl = L.createTable(narg, narg);
+				for (int i = 0; i < narg; i++) {
+					L.rawSetI(tbl, i, argv[i]);
+				}
+				L.setGlobal("arg", tbl);
+			}
+			
+			
+			int status = L.doString(test008);
 			if (status != 0) {
 				Object errObj = L.value(1);
 			    Object tostring = L.getGlobal("tostring");
@@ -49,7 +100,7 @@ public class Test001 {
 			    L.push(result);
 			    L.call(1, 1);
 			    String resultStr = L.toString(L.value(-1));
-				System.out.println("Result >>> " + resultStr);
+				System.err.println("Result >>> " + resultStr);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
