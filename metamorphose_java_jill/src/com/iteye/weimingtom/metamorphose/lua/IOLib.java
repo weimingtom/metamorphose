@@ -48,7 +48,7 @@ public final class IOLib extends LuaJavaCallback
 
   public static void open(Lua L)
   {
-    LuaTable t = L.register("io");
+    /*LuaTable t = */L.register("io");
 
     r(L, "write", WRITE);
   }

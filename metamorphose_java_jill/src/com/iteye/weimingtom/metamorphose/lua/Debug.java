@@ -29,10 +29,10 @@ package com.iteye.weimingtom.metamorphose.lua;
  * because it is not intended to form part of the public API.  It has
  * only been implemented to the extent necessary for internal use.
  */
-final class Debug
+public final class Debug
 {
   // private, no public accessors defined.
-  private int ici;
+  private final int ici;
 
   // public accessors may be defined for these.
   private int event;
@@ -67,6 +67,10 @@ final class Debug
     this.event = event;
   }
 
+  String what() {
+	  return this.what;
+  }
+  
   /**
    * Sets the what field.
    */

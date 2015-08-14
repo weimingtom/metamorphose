@@ -212,7 +212,7 @@ public final class StringLib extends LuaJavaCallback
     try
     {
       ByteArrayOutputStream s = new ByteArrayOutputStream();
-      L.dump(L.value(1), s);
+      Lua.dump(L.value(1), s);
       byte[] a = s.toByteArray();
       s = null;
       StringBuffer b = new StringBuffer();
@@ -1042,7 +1042,7 @@ init:   // labelled while loop emulates "goto init", which we use to
     if (l == CAP_UNFINISHED)
       capUnfinished();
     if (l == CAP_POSITION)
-      return L.valueOfNumber(captureInit(i) +1);
+      return Lua.valueOfNumber(captureInit(i) +1);
     return src.substring(captureInit(i), captureInit(i) + l);
   }
 
@@ -1130,7 +1130,7 @@ init:   // labelled while loop emulates "goto init", which we use to
     else if (!L.isString(L.value(-1)))
     {
       L.error("invalid replacement value (a " +
-          L.typeName(L.type(-1)) + ")");
+          Lua.typeName(L.type(-1)) + ")");
     }
     b.append(L.toString(L.value(-1)));  // add result to accumulator
     L.pop(1);

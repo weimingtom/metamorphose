@@ -39,5 +39,5 @@ package com.iteye.weimingtom.metamorphose.lua;
  */
 public abstract class LuaJavaCallback
 {
-  abstract int luaFunction(Lua L);
+  public abstract int luaFunction(Lua L);
 }

@@ -369,7 +369,7 @@ public final class OSLib extends LuaJavaCallback
 
   private static void setfield(Lua L, String key, int value)
   {
-    L.setField(L.value(-1), key, L.valueOfNumber(value));
+    L.setField(L.value(-1), key, Lua.valueOfNumber(value));
   }
 
   /** Format a positive integer in a 0-filled field of width

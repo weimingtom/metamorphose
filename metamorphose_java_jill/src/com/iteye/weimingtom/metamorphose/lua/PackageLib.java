@@ -258,7 +258,7 @@ public final class PackageLib extends LuaJavaCallback
     module = L.getField(loaded, name);
     if (module == SENTINEL)  // module did not set a value?
     {
-      module = L.valueOfBoolean(true);  // use true as result
+      module = Lua.valueOfBoolean(true);  // use true as result
       L.setField(loaded, name, module); // package.loaded[name] = true
     }
     L.push(module);

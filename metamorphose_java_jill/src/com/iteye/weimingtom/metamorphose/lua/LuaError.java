@@ -27,7 +27,7 @@ package com.iteye.weimingtom.metamorphose.lua;
 /**
  * Represent a Lua error
  */
-final class LuaError extends RuntimeException
+public final class LuaError extends RuntimeException
 {
   int errorStatus;
 

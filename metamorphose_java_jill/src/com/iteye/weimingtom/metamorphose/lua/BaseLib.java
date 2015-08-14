@@ -369,7 +369,7 @@ public final class BaseLib extends LuaJavaCallback
   private static int getfenv(Lua L)
   {
     Object o = getfunc(L);
-    if (L.isJavaFunction(o))
+    if (Lua.isJavaFunction(o))
     {
       L.push(L.getGlobals());
     }
@@ -446,7 +446,7 @@ public final class BaseLib extends LuaJavaCallback
     }
     else
     {
-      L.insert(L.NIL, -1);      // put before error message
+      L.insert(Lua.NIL, -1);      // put before error message
       return 2; // return nil plus error message
     }
   }
@@ -539,7 +539,7 @@ public final class BaseLib extends LuaJavaCallback
     L.checkAny(1);
     int status = L.pcall(L.getTop()-1, Lua.MULTRET, null);
     boolean b = (status == 0);
-    L.insert(L.valueOfBoolean(b), 1);
+    L.insert(Lua.valueOfBoolean(b), 1);
     return L.getTop();
   }
 
@@ -637,7 +637,7 @@ public final class BaseLib extends LuaJavaCallback
       // :todo: change environment of current thread.
       return 0;
     }
-    else if (L.isJavaFunction(o) || !L.setFenv(o, L.value(2)))
+    else if (Lua.isJavaFunction(o) || !L.setFenv(o, L.value(2)))
     {
       L.error("'setfenv' cannot change environment of given object");
     }
@@ -691,7 +691,7 @@ public final class BaseLib extends LuaJavaCallback
       {
       }
     }
-    L.push(L.NIL);
+    L.push(Lua.NIL);
     return 1;
   }
 
@@ -768,7 +768,7 @@ public final class BaseLib extends LuaJavaCallback
     Object errfunc = L.value(2);
     L.setTop(1);        // remove error function from stack
     int status = L.pcall(0, Lua.MULTRET, errfunc);
-    L.insert(L.valueOfBoolean(status == 0), 1);
+    L.insert(Lua.valueOfBoolean(status == 0), 1);
     return L.getTop();  // return status + all results
   }
 
@@ -777,7 +777,7 @@ public final class BaseLib extends LuaJavaCallback
   {
     Lua NL = L.newThread();
     Object faso = L.value(1);
-    L.argCheck(L.isFunction(faso) && !L.isJavaFunction(faso), 1,
+    L.argCheck(L.isFunction(faso) && !Lua.isJavaFunction(faso), 1,
         "Lua function expected");
     L.setTop(1);        // function is at top
     L.xmove(NL, 1);     // move function from L to NL
@@ -793,10 +793,10 @@ public final class BaseLib extends LuaJavaCallback
     int r = auxresume(L, co, L.getTop() - 1);
     if (r < 0)
     {
-      L.insert(L.valueOfBoolean(false), -1);
+      L.insert(Lua.valueOfBoolean(false), -1);
       return 2; // return false + error message
     }
-    L.insert(L.valueOfBoolean(true), L.getTop()-(r-1));
+    L.insert(Lua.valueOfBoolean(true), L.getTop()-(r-1));
     return r + 1;       // return true + 'resume' returns
   }
 

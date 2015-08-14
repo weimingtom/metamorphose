@@ -291,7 +291,7 @@ final class FuncState
   /** Equivalent to luaK_numberK. */
   int kNumberK(double r)
   {
-    return addk(L.valueOfNumber(r));
+    return addk(Lua.valueOfNumber(r));
   }
 
   /** Equivalent to luaK_posfix. */

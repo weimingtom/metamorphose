@@ -649,7 +649,7 @@ public final class Lua
    * @param o  the Object to test.
    * @return true if and only if the object is a function.
    */
-  public static boolean isFunction(Object o)
+  public /*static*/ boolean isFunction(Object o)
   {
     return o instanceof LuaFunction ||
         o instanceof LuaJavaCallback;
@@ -669,7 +669,7 @@ public final class Lua
    * @param o  the Object to test.
    * @return true if and only if the object is Lua <code>nil</code>.
    */
-  public static boolean isNil(Object o)
+  public /*static*/ boolean isNil(Object o)
   {
     return NIL == o;
   }
@@ -680,7 +680,7 @@ public final class Lua
    * @param o  the Object to test.
    * @return true if and only if the object is a number or a convertible string.
    */
-  public static boolean isNumber(Object o)
+  public /*static*/ boolean isNumber(Object o)
   {
     SPARE_SLOT.setObject(o);
     return tonumber(SPARE_SLOT, NUMOP);
@@ -692,7 +692,7 @@ public final class Lua
    * @param o  the Object to test.
    * @return true if and only if object is a string or number.
    */
-  public static boolean isString(Object o)
+  public /*static*/ boolean isString(Object o)
   {
     return o instanceof String || o instanceof Double;
   }
@@ -702,7 +702,7 @@ public final class Lua
    * @param o  the Object to test.
    * @return <code>true</code> if and only if the object is a Lua table.
    */
-  public static boolean isTable(Object o)
+  public /*static*/ boolean isTable(Object o)
   {
     return o instanceof LuaTable;
   }
@@ -910,7 +910,7 @@ public final class Lua
    * @param o  a Lua value.
    * @return its length.
    */
-  public static int objLen(Object o)
+  public /*static*/ int objLen(Object o)
   {
     if (o instanceof String)
     {
@@ -1081,7 +1081,7 @@ public final class Lua
    * @param o2  the other Lua value.
    * @return  true if and only if they compare equal.
    */
-  public static boolean rawEqual(Object o1, Object o2)
+  public /*static*/ boolean rawEqual(Object o1, Object o2)
   {
     return oRawequal(o1, o2);
   }
@@ -1092,7 +1092,7 @@ public final class Lua
    * @param k  The index (key) into the table.
    * @return The value at the specified index.
    */
-  public static Object rawGet(Object t, Object k)
+  public /*static*/ Object rawGet(Object t, Object k)
   {
     LuaTable table = (LuaTable)t;
     return table.getlua(k);
@@ -1104,7 +1104,7 @@ public final class Lua
    * @param i  the index of the element to retrieve.
    * @return  the value at the specified index.
    */
-  public static Object rawGetI(Object t, int i)
+  public /*static*/ Object rawGetI(Object t, int i)
   {
     LuaTable table = (LuaTable)t;
     return table.getnum(i);
@@ -1689,11 +1689,11 @@ protect:
   public int argError(int narg, String extramsg)
   {
     // :todo: use debug API as per PUC-Rio
-    if (true)
+    /*if (true)*/
     {
       return error("bad argument " + narg + " (" + extramsg + ")");
     }
-    return 0;
+    /*return 0;*/
   }
 
   /**
@@ -2001,7 +2001,7 @@ protect:
    * module.
    * @return the new table
    */
-  LuaTable register(String name)
+  public LuaTable register(String name)
   {
     findTable(getRegistry(), LOADED, 1);
     Object loaded = value(-1);

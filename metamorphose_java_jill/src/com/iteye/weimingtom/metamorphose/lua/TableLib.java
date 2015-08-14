@@ -173,7 +173,7 @@ public final class TableLib extends LuaJavaCallback
     while (e.hasMoreElements())
     {
       Object o = e.nextElement();
-      if (L.type(o) == Lua.TNUMBER)
+      if (Lua.type(o) == Lua.TNUMBER)
       {
         double v = L.toNumber(o);
         if (v > max)

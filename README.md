@@ -9,6 +9,10 @@ Project name is from the opening song of 'The Ugly and Beautiful World' (この�
 ## References:  
 * jill  
 http://code.google.com/p/jillcode/  
+* Lua 5.1.4
+http://lua.org/ftp  
+* jillian  
+https://github.com/forcedotcom/jillian  
 
 ## Snapshot:  
 ![Snapshot](/snapshot/launcher_001.png)  

@@ -375,7 +375,7 @@ public final class LuaTable extends java.util.Hashtable
    * behaviour for <code>t[nil]</code>, this code assumes that Lua.NIL
    * is non-<code>null</code>.
    */
-  Object getlua(Object key)
+  public Object getlua(Object key)
   {
     if (key instanceof Double)
     {

@@ -370,7 +370,7 @@ final class Loader
   private void header() throws IOException
   {
     byte[] buf = new byte[HEADERSIZE];
-    int n;
+    /*int n;*/
 
     block(buf);
 
