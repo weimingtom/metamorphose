@@ -76,7 +76,15 @@ public final class Lua
 {
   /** Version string. */
   public static final String VERSION = "Lua 5.1 (Jill 1.0.1)";
-
+  
+  //FIXME:added
+  public static final String RELEASE = "Lua 5.1.4 (Jill 1.0.1)";
+  public static final int VERSION_NUM = 501;
+  public static final String COPYRIGHT = "Copyright (C) 1994-2008 Lua.org, PUC-Rio (Copyright (C) 2006 Nokia Corporation and/or its subsidiary(-ies))";
+  /** http://www.ravenbrook.com */
+  public static final String AUTHORS = "R. Ierusalimschy, L. H. de Figueiredo & W. Celes (Ravenbrook Limited)";
+  
+  
   /** Table of globals (global variables).  This actually shared across
    * all threads (with the same main thread), but kept in each Lua
    * thread as an optimisation.
