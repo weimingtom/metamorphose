@@ -17,4 +17,7 @@ http://lua.org/ftp
 https://github.com/forcedotcom/jillian  
 
 ## Snapshot:  
+* Running on Flash Player for Windows   
 ![Snapshot](/snapshot/launcher_001.png)  
+* Running on Java 6 for Windows   
+![Snapshot](/snapshot/launcher_002.png)    
