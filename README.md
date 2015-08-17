@@ -8,6 +8,10 @@ Project name is from the opening song of 'The Ugly and Beautiful World' (この�
 2015-08-10: lua_call tostring() function before outputing.    
 2015-08-09: Create as3 and java projects.    
 
+## TODO:    
+* script loading (need yield?)    
+* script driven game (for example, reversi)    
+
 ## References:  
 * jill  
 http://code.google.com/p/jillcode/  
