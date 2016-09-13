@@ -2,6 +2,8 @@
 Porting jill (Lua on Java) to ActionScript 3.   
 Project name is from the opening song of 'The Ugly and Beautiful World' (この醜くも美しい世界).   
 Demo page: http://weimingtom.github.io/metamorphose/  
+or 
+https://weimingtom.github.io/metamorphose/  
 
 ## History:  
 2015-08-15: console launcher ported to java swing.    
