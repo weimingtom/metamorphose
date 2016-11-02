@@ -3,3 +3,18 @@
 	符号切割：Sytax.llex()或者StringBuffer.append()
 	语义：Sytax.statement()
 	虚拟机循环：Lua.vmExecute()
+		<-这里断点可以打印出基本指令，例如赋值=操作，赋值return操作
+		<-case OP_LOADK:
+			(this._stack[this._base + a] as Slot).r = (k[ARGBx(i)] as Slot).r;
+			(this._stack[this._base + a] as Slot).d = (k[ARGBx(i)] as Slot).d;
+->			trace("OP_LOADK:stack[" + (this._base+a) + 
+				"]=k[" + ARGBx(i) + "]=" + k[ARGBx(i)].d);
+			continue;
+	
+整数转浮点数字符串精度问题
+断点：precisionTrim
+	<-formatFloatRawF
+		var s:String = d.toPrecision(20); //String(d); //FIXME:整数转字符串会丢失小数点后1位精度
+	<-formatFloatRawE
+		var s:String = d.toPrecision(20);//String(d); //FIXME:整数转浮点
+		

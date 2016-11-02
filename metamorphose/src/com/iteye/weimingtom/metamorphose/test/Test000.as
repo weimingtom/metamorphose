@@ -146,6 +146,10 @@ package com.iteye.weimingtom.metamorphose.test
 			trace("this type:" + flash.utils.getQualifiedClassName(this))
 			//trace("describeType:" + flash.utils.describeType(this).toString());
 			//+ flash.utils.describeType(this).toString());
+			
+			//测试整数转浮点数
+			var mynum:Object = 10;
+			trace("mynum = " + Number(mynum).toPrecision(3));
 		}
 	}
 }
