@@ -28,6 +28,7 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
+    <application path="com/iteye/weimingtom/metamorphose/launcher/Preloader.as"/>
     <application path="com/iteye/weimingtom/metamorphose/test/Test000.as"/>
     <application path="com/iteye/weimingtom/metamorphose/test/Test001.as"/>
     <application path="com/iteye/weimingtom/metamorphose/launcher/Launcher.as"/>
