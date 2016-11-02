@@ -338,8 +338,7 @@ flag:
 				d *= 1e10;
 				offset = 10;
 			}
-
-			var s:String = d.toPrecision(20);//String(d); //FIXME:整数转浮点问题
+			var s:String = d.toPrecision(this._precision);//String(d); //FIXME:整数转浮点问题
 			var t:StringBuffer = new StringBuffer(s);
 			var e:int;      // Exponent value
 			if (d == 0)
@@ -386,7 +385,7 @@ flag:
 		 */
 		private function formatFloatRawF(d:Number):String
 		{
-			var s:String = d.toPrecision(20); //String(d); //FIXME:整数转字符串会丢失小数点后1位精度
+			var s:String = d.toPrecision(this._precision);//String(d); //FIXME:整数转字符串会丢失小数点后1位精度
 			var t:StringBuffer = new StringBuffer(s);
 
 			var di:int = s.indexOf('.');
