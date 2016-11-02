@@ -7,8 +7,8 @@ package com.iteye.weimingtom.metamorphose.launcher
 	import com.iteye.weimingtom.metamorphose.lua.PackageLib;
 	import com.iteye.weimingtom.metamorphose.lua.StringLib;
 	import com.iteye.weimingtom.metamorphose.lua.TableLib;
-	
 	import flash.display.MovieClip;
+	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
@@ -32,6 +32,15 @@ package com.iteye.weimingtom.metamorphose.launcher
 		
 		public function Launcher()
 		{			
+			if (stage) init();
+			else addEventListener(Event.ADDED_TO_STAGE, init);
+		}
+		
+		private function init(e:Event = null):void
+		{
+			removeEventListener(Event.ADDED_TO_STAGE, init);
+			// entry point
+			
 			with(_formatOutput)
 			{
 				font = "宋体";
