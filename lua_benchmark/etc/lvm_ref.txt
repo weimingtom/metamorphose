@@ -1,0 +1,35 @@
+﻿http://mobile.51cto.com/iphone-286631.htm
+http://blog.codingnow.com/2011/03/lua_gc_4.html
+http://comments.gmane.org/gmane.comp.lang.lua.general/79521
+http://mobile.51cto.com/iphone-288412.htm
+http://wenku.baidu.com/view/24241ec4aa00b52acfc7caea.html
+http://www.damonkohler.com/2008/12/lua-on-android.html
+http://bbs.luaer.cn/read-Lua-tid-3004.html
+http://cnztech.com/html/mobile/iOS/2011/0924/46517.html
+http://www.gammon.com.au/forum/?id=8453
+
+lua 分类
+http://stevedonovan.github.com/lua-5.1.4/
+
+lua4
+http://cjbskysea.blogbus.com/logs/84351473.html
+http://blog.csdn.net/wondeful18/article/details/2982251
+
+slb
+http://code.google.com/p/slb/
+
+lua yield
+http://klcommon.googlecode.com/svn/trunk/collections/docs/lua_yield.txt
+
+LUAI_TRY
+http://springrts.com/mantis/view.php?id=1160
+
+pdc
+http://www.facepunch.com/threads/882719
+
+0/0
+http://cjbskysea.blogbus.com/logs/70065912.html
+
+spring-rts
+http://gitorious.org/spring-rts/mainline/trees/master/game
+

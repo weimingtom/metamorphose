@@ -1,0 +1,93 @@
+﻿Lua5.1代码修改记录
+
+这些补丁只是用来学习代码，无任何实际用途。
+
+--------------------------------------
+1. 替换LUAI_THROW和LUAI_TRY：
+使用特定于Windows的__try和__except扩展关键词（见msdn），
+用Access Violation（地址违例）来模拟抛异常，
+替换原有的setjmp和longjmp实现。
+
+/* default handling with long jumps */
+#if 0
+#define LUAI_THROW(L,c)	longjmp((c)->b, 1)
+#define LUAI_TRY(L,c,a)	if (setjmp((c)->b) == 0) { a }
+#define luai_jmpbuf	jmp_buf
+#else
+//新增，用于测试try
+//http://blog.csdn.net/vblittleboy/article/details/6561868
+#define LUAI_THROW(L,c)	do { unsigned char *p = (unsigned char *)(0x0); *p = 0; } while(0)
+//EXCEPTION_EXECUTE_HANDLER
+#include <stdio.h>
+#define LUAI_TRY(L,c,a)	__try { a } __except(1) \
+	{fprintf(stderr, "Got __except!\n"); if ((c)->status == 0) (c)->status = -1;}
+#define luai_jmpbuf	int 
+#endif
+
+运行结果：
+Lua 5.1.4  Copyright (C) 1994-2008 Lua.org, PUC-Rio
+> a=a..1
+Got __except!
+stdin:1: attempt to concatenate global 'a' (a nil value)
+stack traceback:
+        stdin:1: in main chunk
+        [C]: ?
+>
+
+--------------------------------------
+2. 打印当前虚拟机pc指令和上下文
+用于控制台交互模式的指令测试。
+
+void luaV_execute (lua_State *L, int nexeccalls) {
+  LClosure *cl;
+  StkId base;
+  TValue *k;
+  const Instruction *pc;
+ reentry:  /* entry point */
+  lua_assert(isLua(L->ci));
+  pc = L->savedpc;
+  cl = &clvalue(L->ci->func)->l;
+  base = L->base;
+  k = cl->p->k;
+  {
+	  const int *mypc;
+	  int i = 0;
+	  for(mypc = pc; *mypc && i < cl->p->sizecode; i++, mypc++)
+	  {
+		  printf("Instruction[%d]=%d,OP=%d,A=%d,B=%d,C=%d,Bx=%d,sBx=%d\n", 
+			  i, *mypc, 
+			  GET_OPCODE(*mypc), GETARG_A(*mypc), 
+			  GETARG_B(*mypc), GETARG_C(*mypc),
+			  GETARG_Bx(*mypc), GETARG_sBx(*mypc));
+	  }
+  }
+
+运行结果：
+Lua 5.1.4  Copyright (C) 1994-2008 Lua.org, PUC-Rio
+> print("hello")
+Instruction[0]=5,OP=5,A=0,B=0,C=0,Bx=0,sBx=-131071
+Instruction[1]=16449,OP=1,A=1,B=0,C=1,Bx=1,sBx=-131070
+Instruction[2]=16793628,OP=28,A=0,B=2,C=1,Bx=1025,sBx=-130046
+Instruction[3]=8388638,OP=30,A=0,B=1,C=0,Bx=512,sBx=-130559
+hello
+>
+
+查看OP码最简单的方法是直接用luac看指令
+（Windows下用Ctrl+Z结束stdin输入）
+C:\Documents and Settings\Administrator>luac -p -l -
+print("hello")
+^Z
+
+main <stdin:0,0> (4 instructions, 16 bytes at 00383270)
+0+ params, 2 slots, 0 upvalues, 0 locals, 2 constants, 0 functions
+        1       [1]     GETGLOBAL       0 -1    ; print
+        2       [1]     LOADK           1 -2    ; "hello"
+        3       [1]     CALL            0 2 1
+        4       [1]     RETURN          0 1
+
+
+3. luadec使用
+
+如果用luadec反编译时崩溃，可尝试加些额外的参数：
+luadec -l guess_local -l2 LDS2 luac.out > out.txt
+
