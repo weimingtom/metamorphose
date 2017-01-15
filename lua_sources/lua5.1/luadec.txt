@@ -1,0 +1,1 @@
+luadec -l guess_local -l2 LDS2 luac.out > out.txt

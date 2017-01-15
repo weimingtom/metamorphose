@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="etc">
+      <UniqueIdentifier>{29809f20-1cc4-4909-a353-3a7fde7f2534}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\etc\bin2c.c">
+      <Filter>etc</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
