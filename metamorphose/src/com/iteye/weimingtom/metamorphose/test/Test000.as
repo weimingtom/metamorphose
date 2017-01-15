@@ -149,7 +149,34 @@ package com.iteye.weimingtom.metamorphose.test
 			
 			//测试整数转浮点数
 			var mynum:Object = 10;
-			trace("mynum = " + Number(mynum).toPrecision(3));
+			trace("mynum = " + Number(mynum).toFixed(3));
+			var mynum2:Object = 0.9;
+			trace("mynum2 = " + Number(mynum2).toFixed(3));
+			var mynum3:Object = 123456;
+			trace("mynum3 = " + Number(mynum3).toFixed(3));
+						
+			//private function formatFloatRawF(d:Number):String
+			//{
+			//var s:String = d.toPrecision(this._precision);//String(d);
+			
+			//http://www.jb51.net/flash/actionscript/20345.html
+			//AS的一些顶级类： 
+			//1,使用Number类进行数字类型转换 
+			//var myNumber:Number=new Number(1234); 
+			//myNumber.toString();转化为字符串 
+			//2.Number.toFixed(fractionDigits) 
+			//用来返回Number实例的字符串表示值，以固定浮点表示法 
+			//3.Number.toExponential(fractonDigits) 
+			//用来返回Number实例的字符串表示值，以指数表示法 
+			//var myNumber:Number=new Number(3.1415926) 
+			//myNumber.toExponential（2)//返回3.14e+0 
+			//4.Number.toPrecision(precision) 
+			//用来返回Number实例的字符串表示值，采用不同的精确度 
+			//var myNumber:Number=new Number(1234); 
+			//myNumber.toPrecision(3);//返回1.23e+3； 
+			//5.Number.valueOf用来返回Number实例的初始值 
+			//var myNumber:Number=new Number(); 
+			//trace(myNumber.valueOf())//输出0.
 		}
 	}
 }

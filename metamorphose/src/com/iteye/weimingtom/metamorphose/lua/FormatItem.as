@@ -385,7 +385,12 @@ flag:
 		 */
 		private function formatFloatRawF(d:Number):String
 		{
-			var s:String = d.toPrecision(this._precision);//String(d); //FIXME:整数转字符串会丢失小数点后1位精度
+			//toPrecision
+			var s:String = String(d);//d.toPrecision(this._precision);//String(d); //FIXME:整数转字符串会丢失小数点后1位精度
+			if (d % 1 === 0)
+			{
+				s = d.toFixed(1);
+			}
 			var t:StringBuffer = new StringBuffer(s);
 
 			var di:int = s.indexOf('.');
