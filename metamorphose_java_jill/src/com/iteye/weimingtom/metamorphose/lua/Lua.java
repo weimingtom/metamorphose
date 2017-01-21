@@ -74,6 +74,8 @@ import java.util.Vector;
  */
 public final class Lua
 {
+	public final static boolean D = false;
+	
   /** Version string. */
   public static final String VERSION = "Lua 5.1 (Jill 1.0.1)";
   
@@ -1528,7 +1530,9 @@ protect:
     {
       return NIL;
     }
-    System.err.println("value:"+idx);
+    if (D) {
+    	System.err.println("value:"+idx);
+    }
     return stack[idx].asObject();
   }
 
@@ -2309,12 +2313,16 @@ protect:
     switch (errcode)
     {
       case ERRMEM:
-    	  System.err.println("dSeterrorobj:" + oldtop);
+    	  if (D) {
+    		  System.err.println("dSeterrorobj:" + oldtop);
+    	  }
         stack[oldtop].r = MEMERRMSG;
         break;
 
       case ERRERR:
-    	  System.err.println("dSeterrorobj:" + oldtop);
+    	  if (D) {
+    		  System.err.println("dSeterrorobj:" + oldtop);
+    	  }
         stack[oldtop].r = "error in error handling";
         break;
 
@@ -2752,10 +2760,14 @@ protect:
 	  
     if (ISK(field))
     {
-    	System.err.println("RK:" + field);
+    	if (D) {
+    		System.err.println("RK:" + field);
+    	}
       return k[field & 0xff];
     }
-    System.err.println("RK:" + (base + field));
+    if (D) {
+    	System.err.println("RK:" + (base + field));
+    }
     return stack[base + field];
   }
 
@@ -2887,7 +2899,9 @@ protect:
       int n = 2;  // number of elements handled in this pass (at least 2)
       if (!tostring(top-2)|| !tostring(top-1))
       {
-    	  System.err.println("vmConcat:" + (top-2) + "," + (top-1));
+    	  if (D) {
+    		  System.err.println("vmConcat:" + (top-2) + "," + (top-1));
+    	  }
         if (!call_binTM(stack[top-2], stack[top-1],
             stack[top-2], "__concat"))
         {
@@ -3741,7 +3755,9 @@ reentry:
     // result first is always correct.
     while (i != 0 && firstResult < top)
     {
-    	System.err.println("vmPoscall:" + res);
+    	if (D) {
+    		System.err.println("vmPoscall:" + res);
+    	}
       stack[res].r = stack[firstResult].r;
       stack[res].d = stack[firstResult].d;
       ++res;
@@ -3771,7 +3787,9 @@ reentry:
   private int vmPrecall(int func, int r)
   {
     Object faso;        // Function AS Object
-    System.err.println("vmPrecall:" + func);
+    if (D) {
+    	System.err.println("vmPrecall:" + func);
+    }
     faso = stack[func].r;
     if (!isFunction(faso))
     {
@@ -3998,7 +4016,9 @@ reentry:
     push(p1);
     push(p2);
     vmCall(stackSize-3, 1);
-    System.err.println("callTMres:" +(stackSize - 1));
+    if (D) {
+    	System.err.println("callTMres:" +(stackSize - 1));
+    }
     res.r = stack[stackSize-1].r;
     res.d = stack[stackSize-1].d;
     pop(1);
@@ -4015,7 +4035,9 @@ reentry:
     push(p1);
     push(p2);
     vmCall(stackSize-3, 1);
-    System.err.println("callTMres" + (stackSize - 1));
+    if (D) {
+    	System.err.println("callTMres" + (stackSize - 1));
+    }
     res.r = stack[stackSize-1].r;
     res.d = stack[stackSize-1].d;
     pop(1);
@@ -4082,8 +4104,11 @@ reentry:
    */
   private void stacksetsize(int n)
   {
-	  if(n == 3)
-		  System.err.println("stacksetsize:"+n);
+	  if(n == 3) {
+		  if (D) {
+			  System.err.println("stacksetsize:"+n);
+		  }
+	  }
     // It is absolutely critical that when the stack changes sizes those
     // elements that are common to both old and new stack are unchanged.
 
@@ -4142,7 +4167,9 @@ reentry:
   {
     int i = stackSize;
     stacksetsize(i+1);
-	  System.err.println("stackAdd:"+i);
+    if (D) {
+    	System.err.println("stackAdd:"+i);
+    }
     stack[i].setObject(o);
   }
 
@@ -4153,7 +4180,9 @@ reentry:
   {
     int i = stackSize;
     stacksetsize(i+1);
-    System.err.println("push:" + i);
+    if (D) {
+    	System.err.println("push:" + i);
+    }
     stack[i].r = p.r;
     stack[i].d = p.d;
   }
@@ -4167,7 +4196,9 @@ reentry:
     // A loop from n to 1 copies n slots.
     for (int j=n; j>=1; --j)
     {
-    	System.err.println("stackInsertAt:" + (i+j));
+    	if (D) {
+    		System.err.println("stackInsertAt:" + (i+j));
+    	}
       stack[i+j].r = stack[i+j-1].r;
       stack[i+j].d = stack[i+j-1].d;
     }
@@ -4238,7 +4269,9 @@ reentry:
   {
     if (tonumber(stack[idx], NUMOP))
     {
-    	System.err.println("tonumber:"+idx);
+    	if (D) {
+    		System.err.println("tonumber:"+idx);
+    	}
       stack[idx].d = NUMOP[0];
       stack[idx].r = NUMBER;
       return true;
@@ -4281,7 +4314,9 @@ reentry:
     {
       return false;
     }
-    System.err.println("tostring:"+idx);
+    if (D) {
+    	System.err.println("tostring:"+idx);
+    }
     stack[idx].r = s;
     return true;
   }
@@ -4292,7 +4327,9 @@ reentry:
    */
   private Object tryfuncTM(int func)
   {
-	  System.err.println("tryfuncTM:"+func);
+	  if (D) {
+		  System.err.println("tryfuncTM:"+func);
+	  }
     Object tm = tagmethod(stack[func].asObject(), "__call");
     if (!isFunction(tm))
     {
@@ -4361,7 +4398,9 @@ reentry:
   {
     if (o instanceof Double)
     {
-    	System.err.println("setObjectAt"+ idx);
+    	if (D) {
+    		System.err.println("setObjectAt"+ idx);
+    	}
       stack[idx].r = NUMBER;
       stack[idx].d = ((Double)o).doubleValue();
       return;
@@ -4575,7 +4614,9 @@ final class Slot
     {
       r = Lua.NUMBER;
       d = ((Double)o).doubleValue();
-  	System.err.println("Slot.setObject:" + d);
+      if (Lua.D) {
+    	  System.err.println("Slot.setObject:" + d);
+      }
     }
   }
 }

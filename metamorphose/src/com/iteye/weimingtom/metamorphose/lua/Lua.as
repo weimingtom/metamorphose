@@ -87,6 +87,8 @@ package com.iteye.weimingtom.metamorphose.lua
 	 */
 	public final class Lua
 	{		
+		public static const D:Boolean = false; 
+		
 		/** Version string. */
 		public static const VERSION:String = "Lua 5.1 (Jill 1.0.1)";
 		
@@ -2414,7 +2416,7 @@ package com.iteye.weimingtom.metamorphose.lua
 			var i:int = this._openupval.length;
 			while (--i >= 0)
 			{
-				var uv:UpVal = this._openupval.elementAt(i) as UpVal;
+				var uv:UpVal = this._openupval[i] as UpVal; //FIXME:var uv:UpVal = this._openupval.elementAt(i) as UpVal;
 				if (uv.offset < level)
 				{
 					break;
@@ -2432,10 +2434,10 @@ package com.iteye.weimingtom.metamorphose.lua
 			 * We search from the end of the Vector towards the beginning,
 			 * looking for an UpVal for the required stack-slot.
 			 */
-			var i:int = this._openupval.size();
+			var i:int = this._openupval.length;//FIXME:.size();
 			while (--i >= 0)
 			{
-				var uv2:UpVal = this._openupval.elementAt(i) as UpVal;
+				var uv2:UpVal = this._openupval[i] as UpVal; //FIXME:var uv2:UpVal = this._openupval.elementAt(i) as UpVal;
 				if (uv2.offset == idx)
 				{
 					return uv2;
@@ -2448,7 +2450,7 @@ package com.iteye.weimingtom.metamorphose.lua
 			// i points to be position _after_ which we want to insert a new
 			// UpVal (it's -1 when we want to insert at the beginning).
 			var uv:UpVal = new UpVal(idx, this._stack[idx] as Slot);
-			this._openupval.insertElementAt(uv, i+1);
+			this._openupval.splice(i+1, 0, uv);//FIXME:this._openupval.insertElementAt(uv, i+1);
 			return uv;
 		}
 
@@ -3104,8 +3106,11 @@ package com.iteye.weimingtom.metamorphose.lua
 						case OP_LOADK:
 							(this._stack[this._base + a] as Slot).r = (k[ARGBx(i)] as Slot).r;
 							(this._stack[this._base + a] as Slot).d = (k[ARGBx(i)] as Slot).d;
-							trace("OP_LOADK:stack[" + (this._base+a) + 
-								"]=k[" + ARGBx(i) + "]=" + k[ARGBx(i)].d);
+							if (D) 
+							{
+								trace("OP_LOADK:stack[" + (this._base+a) + 
+									"]=k[" + ARGBx(i) + "]=" + k[ARGBx(i)].d);
+							}
 							continue;
 				  
 						case OP_LOADBOOL:
@@ -4204,7 +4209,12 @@ package com.iteye.weimingtom.metamorphose.lua
 		private function stacksetsize(n:int):void
 		{
 			if(n == 3)
-				trace("stacksetsize:" + n);
+			{
+				if (Lua.D)
+				{
+					trace("stacksetsize:" + n);
+				}
+			}
 			// It is absolutely critical that when the stack changes sizes those
 			// elements that are common to both old and new stack are unchanged.
 

@@ -47,6 +47,8 @@ package com.iteye.weimingtom.metamorphose.lua
 	 */
 	public final class Proto
 	{
+		private static const D:Boolean = false; 
+		
 		/** Interned 0-element array. */
 		private static var ZERO_INT_ARRAY:Array = new Array(); /*int[] = new int[0]*/
 		private static var ZERO_LOCVAR_ARRAY:Array = new Array(); /*LocVar[]  = new LocVar[0]*/
@@ -264,10 +266,13 @@ package com.iteye.weimingtom.metamorphose.lua
 		/** Append instruction. */
 		public function codeAppend(L:Lua, pc:int, instruction:int, line:int):void
 		{
-			trace("pc:" + pc + 
-				", instruction:" + instruction + 
-				", line:" + line + 
-				", lineinfo.length:" + lineinfo.length);
+			if (D) 
+			{
+				trace("pc:" + pc + 
+					", instruction:" + instruction + 
+					", line:" + line + 
+					", lineinfo.length:" + lineinfo.length);
+			}
 			
 			ensureCode(L, pc);
 			this._code[pc] = instruction;

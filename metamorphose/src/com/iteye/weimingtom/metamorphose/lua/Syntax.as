@@ -341,7 +341,10 @@ package com.iteye.weimingtom.metamorphose.lua
 		 */
 		private function llex():int // throws IOException
 		{
-			trace("llex() enter, current:" + this._current);
+			if (Lua.D)
+			{
+				trace("llex() enter, current:" + this._current);
+			}
 			this._buff.setLength(0);
 			while (true)
 			{
@@ -349,12 +352,18 @@ package com.iteye.weimingtom.metamorphose.lua
 				{
 					case '\n':
 					case '\r':
-						trace("case \\n\\r");
+						if (Lua.D)
+						{
+							trace("case \\n\\r");
+						}
 						inclinenumber();
 						continue;
 				
 					case '-':
-						trace("case -");
+						if (Lua.D)
+						{
+							trace("case -");
+						}
 						next();
 						if (this._current != '-'.charCodeAt())
 							return '-'.charCodeAt();
@@ -377,7 +386,10 @@ package com.iteye.weimingtom.metamorphose.lua
 						continue;
 
 					case '[':
-						trace("case [");
+						if (Lua.D)
+						{
+							trace("case [");
+						}
 						var sep:int = skip_sep();
 						if (sep >= 0)
 						{
@@ -391,7 +403,10 @@ package com.iteye.weimingtom.metamorphose.lua
 						continue;     // avoids Checkstyle warning.
 				
 					case '=':
-						trace("case =");
+						if (Lua.D)
+						{
+							trace("case =");
+						}
 						next() ;
 						if (this._current != '='.charCodeAt())
 						{ 
@@ -404,7 +419,10 @@ package com.iteye.weimingtom.metamorphose.lua
 						}
 					
 					case '<':
-						trace("case <");
+						if (Lua.D)
+						{
+							trace("case <");
+						}
 						next();
 						if (this._current != '='.charCodeAt())
 						{ 
@@ -417,7 +435,10 @@ package com.iteye.weimingtom.metamorphose.lua
 						}
 					
 					case '>':
-						trace("case >");
+						if (Lua.D)
+						{
+							trace("case >");
+						}
 						next() ;
 						if (this._current != '='.charCodeAt())
 						{ 
@@ -430,7 +451,10 @@ package com.iteye.weimingtom.metamorphose.lua
 						}
 					
 					case '~':
-						trace("case ~");
+						if (Lua.D)
+						{
+							trace("case ~");
+						}
 						next();
 						if (this._current != '='.charCodeAt())
 						{ 
@@ -444,12 +468,18 @@ package com.iteye.weimingtom.metamorphose.lua
 					
 					case '"':
 					case '\'':
-						trace("case \"'");
+						if (Lua.D)
+						{
+							trace("case \"'");
+						}
 						read_string(this._current);
 						return TK_STRING;
 				
 					case '.':
-						trace("case .");
+						if (Lua.D)
+						{
+							trace("case .");
+						}
 						save_and_next();
 						if (check_next("."))
 						{
@@ -473,26 +503,38 @@ package com.iteye.weimingtom.metamorphose.lua
 						}
 					
 					case String.fromCharCode(EOZ): //TODO:
-						trace("case EOZ");
+						if (Lua.D)
+						{
+							trace("case EOZ");
+						}
 						return TK_EOS;
 					
 					default:
 						if (isspace(this._current))
 						{
-							trace("isspace");
+							if (Lua.D)
+							{
+								trace("isspace");
+							}
 							// assert !currIsNewline();
 							next();
 							continue;
 						}
 						else if (isdigit(this._current))
 						{
-							trace("isdigit");
+							if (Lua.D)
+							{
+								trace("isdigit");
+							}
 							read_numeral();
 							return TK_NUMBER;
 						}
 						else if (isalpha(this._current) || this._current == '_'.charCodeAt())
 						{
-							trace("isalpha or _");
+							if (Lua.D)
+							{
+								trace("isalpha or _");
+							}
 							// identifier or reserved word
 							do
 							{
@@ -525,7 +567,10 @@ package com.iteye.weimingtom.metamorphose.lua
 		private function next():void //throws IOException
 		{
 			this._current = this._z.read();
-			trace("Syntax.next(), current:" + this._current + "(" + String.fromCharCode(this._current) +")");
+			if (Lua.D) 
+			{
+				trace("Syntax.next(), current:" + this._current + "(" + String.fromCharCode(this._current) +")");
+			}
 		}
 
 		/** Reads number.  Writes to semR. */
