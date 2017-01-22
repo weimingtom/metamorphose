@@ -45,7 +45,7 @@ package com.iteye.weimingtom.metamorphose.lua
 	{		
 		public function luaFunction(L:Lua):int
 		{
-			throw Error("abstract class error");
+			throw new Error("abstract class error");
 		}
 	}
 }
