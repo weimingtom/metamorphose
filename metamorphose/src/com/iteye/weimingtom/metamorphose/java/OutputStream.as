@@ -1,4 +1,4 @@
-package com.iteye.weimingtom.metamorphose.java 
+﻿package com.iteye.weimingtom.metamorphose.java 
 {
 	import flash.utils.ByteArray;
 
@@ -46,7 +46,7 @@ package com.iteye.weimingtom.metamorphose.java
 		private function throwError(str:String):void
 		{
 			trace(str);
-			throw Error(str);
+			throw new Error(str);
 		}
 	}
 }
