@@ -1,4 +1,4 @@
-/*  $Header: //info.ravenbrook.com/project/jili/version/1.1/code/mnj/lua/LuaJavaCallback.java#1 $
+﻿/*  $Header: //info.ravenbrook.com/project/jili/version/1.1/code/mnj/lua/LuaJavaCallback.java#1 $
  * Copyright (c) 2006 Nokia Corporation and/or its subsidiary(-ies).
  * All rights reserved.
  * 
@@ -45,7 +45,7 @@ package com.iteye.weimingtom.metamorphose.lua
 	{		
 		public function luaFunction(L:Lua):int
 		{
-			throw Error("abstract class error");
+			throw new Error("abstract class error");
 		}
 	}
 }
