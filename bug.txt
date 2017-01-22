@@ -1,0 +1,2 @@
+1. throw Error->throw new Error
+2. new Number(this._i); -> typeof(new Number()) === 'object'
