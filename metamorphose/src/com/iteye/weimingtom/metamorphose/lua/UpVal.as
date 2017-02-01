@@ -114,8 +114,9 @@ package com.iteye.weimingtom.metamorphose.lua
 		 */
 		public function close():void
 		{
+			var _s2:Slot = this._s;
 			this._s = new Slot();
-			this._s.init1(this._s); //TODO:
+			this._s.init1(_s2);
 			_offset = -1;
 		}
 	}

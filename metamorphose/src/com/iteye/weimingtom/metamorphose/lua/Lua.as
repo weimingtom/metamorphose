@@ -3149,7 +3149,13 @@ package com.iteye.weimingtom.metamorphose.lua
 						case OP_GETTABLE:
 							{
 								this._savedpc = pc; // Protect
-								var h:Object = this._stack[this._base + ARGB(i)].asObject();
+								var h:Object = (this._stack[this._base + ARGB(i)] as Slot).asObject();
+								if (D)
+								{
+									trace("OP_GETTABLE index = " + (this._base + ARGB(i)) + 
+										", size = " + this._stack.length +
+										", h = " + h);
+								}
 								vmGettable(h, RK(k, ARGC(i)), this._stack[this._base + a] as Slot);
 								continue;
 							}
@@ -3668,6 +3674,7 @@ package com.iteye.weimingtom.metamorphose.lua
 									}	
 								}
 								var nf:LuaFunction = new LuaFunction(p, up, _function.env);
+								//up = null;
 								(this._stack[this._base + a] as Slot).r = nf;
 								continue;
 							}
@@ -4494,7 +4501,10 @@ package com.iteye.weimingtom.metamorphose.lua
 				(this._stack[idx] as Slot).d = o as Number;
 				return;
 			}
-			trace(idx, _stack);
+			if (D)
+			{
+				trace("setObjectAt(o, " + idx + ") from " + _stack);
+			}
 			(this._stack[idx] as Slot).r = o;
 		}
 

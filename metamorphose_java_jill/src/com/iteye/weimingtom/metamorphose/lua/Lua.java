@@ -3077,6 +3077,12 @@ reentry:
           {
             savedpc = pc; // Protect
             Object h = stack[base+ARGB(i)].asObject();
+			if (D)
+			{
+				System.err.println("OP_GETTABLE index = " + (this.base + ARGB(i)) + 
+					", size = " + this.stack.length +
+					", h = " + h);
+			}
             vmGettable(h, RK(k, ARGC(i)), stack[base+a]);
             continue;
           }

@@ -76,6 +76,14 @@ package com.iteye.weimingtom.metamorphose.lua
 		
 			this._p = proto;
 			this._upval = upval;
+			//FIXME:调试用
+			//if (this._upval != null && 
+			//	this._upval.length == 2)
+			//{
+			//	(this._upval[0] as UpVal)._s.tagUpVal = true;
+			//	(this._upval[1] as UpVal)._s.tagUpVal = true;
+			//	trace("this._upval.length == 2");
+			//}
 			this._env = env;
 		}
 		

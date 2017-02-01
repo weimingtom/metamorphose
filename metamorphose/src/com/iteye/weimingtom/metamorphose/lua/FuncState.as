@@ -512,7 +512,7 @@ package com.iteye.weimingtom.metamorphose.lua
 
 		private function constfolding(op:int, e1:Expdesc, e2:Expdesc):Boolean
 		{
-			var r:Number;
+			var r:Number = 0;
 			if (!isnumeral(e1) || !isnumeral(e2))
 				return false;
 			

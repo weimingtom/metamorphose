@@ -121,21 +121,21 @@ package com.iteye.weimingtom.metamorphose.lua
 		* for the character for the token; for other tokens a member of the
 		* enum (all of which are > 255).
 		*/
-		private var _token:int;
+		private var _token:int = 0;
 		/** Semantic info for token; a number. */
-		private var _tokenR:Number;
+		private var _tokenR:Number = 0;
 		/** Semantic info for token; a string. */
 		private var _tokenS:String;
 
 		/** Lookahead token value. */
 		private var _lookahead:int = TK_EOS;
 		/** Semantic info for lookahead; a number. */
-		private var _lookaheadR:Number;
+		private var _lookaheadR:Number = 0;
 		/** Semantic info for lookahead; a string. */
 		private var _lookaheadS:String;
 
 		/** Semantic info for return value from {@link #llex}; a number. */
-		private var _semR:Number;
+		private var _semR:Number = 0;
 		/** As {@link #semR}, for string. */
 		private var _semS:String;
 

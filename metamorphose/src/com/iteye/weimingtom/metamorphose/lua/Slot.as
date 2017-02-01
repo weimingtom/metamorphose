@@ -30,8 +30,10 @@ package com.iteye.weimingtom.metamorphose.lua
 {
 	public final class Slot
 	{
-		private var _r:Object;
-		private var _d:Number;
+		private var _r:Object = null;
+		private var _d:Number = 0;
+		//private var _tag:Boolean = false;
+		//public var tagUpVal:Boolean = false;
 		
 		public function Slot()
 		{
@@ -42,6 +44,7 @@ package com.iteye.weimingtom.metamorphose.lua
 		{
 			this._r = s._r;
 			this._d = s._d;
+			//testD();
 		}
 		
 		//TODO:
@@ -61,19 +64,39 @@ package com.iteye.weimingtom.metamorphose.lua
 		
 		public function setObject(o:Object):void
 		{
-			//trace("setObject:", o.toString());
+			//_tag = true;
+			//if (!Lua.D)
+			//{
+			//	if (o == null)
+			//	{
+			//		trace("setObject:", o.toString());
+			//	}
+			//}
 			this._r = o;
 			if (o is Number)
 			{
 				this._r = Lua.NUMBER;
 				this._d = o as Number;
+				//testD();
 			}
+			//if (_d == 150048)
+			//{
+			//	trace("setObject 150048:", o.toString());
+			//}
 		}
 		
 		//新增
 		public function set r(r:Object):void
 		{
 			this._r = r;
+			//if (r == null)
+			//{
+			//	if (Lua.D)
+			//	{
+			//		//FIXME:如果为空值的话报错，可以用于发现问题(index no value错误）
+			//		trace("Slot set r : ", r.toString());
+			//	}
+			//}	
 		}
 		
 		//新增
@@ -85,13 +108,41 @@ package com.iteye.weimingtom.metamorphose.lua
 		//新增
 		public function set d(d:Number):void
 		{
+			//if (this.tagUpVal == true)
+			//{
+			//	trace("======this.tagUpVal == true, set d from " + this._d + "=>" + d);
+			//}
 			this._d = d;
+			//testD();
 		}
 		
 		//新增
 		public function get d():Number
 		{
 			return this._d;
+		}
+		
+		//调试用
+		private function testD__():void
+		{
+			/*
+			if (this._d == 150048)
+			{
+				trace("setObject 150048:xxx r==" + this._r);
+			}
+			*/
+			//if (isNaN(this._d))
+			//{
+			//	trace("setObject 150048:xxxxx");
+			//}
+			//if (this.tagUpVal == true)
+			//{
+			//	trace("==============");
+			//}
+			//if (this.tagUpVal == true)
+			//{
+			//	trace("======this.tagUpVal == true, =>" + this._d);
+			//}
 		}
 	}
 }

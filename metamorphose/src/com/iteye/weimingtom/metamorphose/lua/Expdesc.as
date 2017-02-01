@@ -49,12 +49,12 @@ package com.iteye.weimingtom.metamorphose.lua
 		public static const VCALL:int = 13;          // info = instruction pc
 		public static const VVARARG:int = 14;        // info = instruction pc
 
-		private var _k:int;        // one of V* enums above
-		private var _info:int;
-		private var _aux:int;
-		private var _nval:Number;
-		private var _t:int;
-		private var _f:int;
+		private var _k:int = 0;        // one of V* enums above
+		private var _info:int = 0;
+		private var _aux:int = 0;
+		private var _nval:Number = 0;
+		private var _t:int = 0;
+		private var _f:int = 0;
 		
 		//TODO:
 		public function Expdesc() 

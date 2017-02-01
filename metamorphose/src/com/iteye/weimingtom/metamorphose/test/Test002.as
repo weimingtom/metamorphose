@@ -36,7 +36,6 @@ package com.iteye.weimingtom.metamorphose.test
 			const isLoadLib:Boolean = true;
 			try
 			{
-				trace("Start test...");
 				var L:Lua = new Lua();
 				if(isLoadLib)
 				{
