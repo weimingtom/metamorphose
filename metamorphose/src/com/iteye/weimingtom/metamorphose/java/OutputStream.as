@@ -1,4 +1,4 @@
-﻿package com.iteye.weimingtom.metamorphose.java 
+package com.iteye.weimingtom.metamorphose.java 
 {
 	import flash.utils.ByteArray;
 

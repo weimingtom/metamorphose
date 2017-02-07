@@ -1,5 +1,6 @@
 package com.iteye.weimingtom.metamorphose.launcher
 {
+	import com.iteye.weimingtom.metamorphose.java.PrintStream;
 	import com.iteye.weimingtom.metamorphose.lua.BaseLib;
 	import com.iteye.weimingtom.metamorphose.lua.Lua;
 	import com.iteye.weimingtom.metamorphose.lua.MathLib;
@@ -7,6 +8,7 @@ package com.iteye.weimingtom.metamorphose.launcher
 	import com.iteye.weimingtom.metamorphose.lua.PackageLib;
 	import com.iteye.weimingtom.metamorphose.lua.StringLib;
 	import com.iteye.weimingtom.metamorphose.lua.TableLib;
+	
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
@@ -183,17 +185,19 @@ package com.iteye.weimingtom.metamorphose.launcher
 			}
 		}
 		
-		private function log(str:String):void
+		private function log(str:String, lineReturn:Boolean = true):void
 		{
-			_tfOutput.appendText(str + "\n");
+			_tfOutput.appendText(str + (lineReturn ? "\n" : ""));
 			_tfOutput.scrollV = _tfOutput.numLines;
 		}
 		
 		private function execute(str:String):void
 		{
+			PrintStream.init();
 			_L.setTop(0);
 			//trace(str);
 			var res:int = _L.doString(str);
+			log(PrintStream.OutputArr.join("\n"), false);
 			if (res == 0)
 			{
 				var obj:Object = _L.value(1);
