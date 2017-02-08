@@ -1,2 +1,4 @@
 1. throw Error->throw new Error
 2. new Number(this._i); -> typeof(new Number()) === 'object'
+3. (TODO) throw new Error("IllegalArgumentException"); -> throw new XXX(); and so on...  
+
