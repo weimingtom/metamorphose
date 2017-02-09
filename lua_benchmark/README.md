@@ -11,6 +11,9 @@
 	http://luajit.org/performance.html  
 	https://github.com/xebecnan/UniLua  
 
+* tdzl2003/lua.js  
+	https://github.com/tdzl2003/lua.js  
+
 # Other  
 * https://github.com/adamwiggins/lua-pong  
 * https://github.com/lichuang/Lua-Source-Internal  
