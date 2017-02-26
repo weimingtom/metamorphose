@@ -5,3 +5,5 @@
 5. (done) (TODO) lua_sources/bin/*.exe
 6. (TODO) Java PrintStream output to window (see as3 PrintStream class)  
 7. (TODO) Applet  
+8. (TODO) Lua.vmEqualRef : if (getQualifiedClassName(a) == getQualifiedClassName(b)) => xxx != xxx
+9. (TODO) merge flexjs version
