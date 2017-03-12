@@ -8,3 +8,4 @@
 8. (TODO) Lua.vmEqualRef : if (getQualifiedClassName(a) == getQualifiedClassName(b)) => xxx != xxx
 9. (TODO) merge flexjs version
 10. (TODO) No IOLib implementation
+11. (TODO) LuaFunction: public function set env(env:LuaTable):void {...this.env = env;->this._env = env;
