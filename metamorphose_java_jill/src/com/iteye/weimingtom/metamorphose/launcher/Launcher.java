@@ -330,6 +330,16 @@ public class Launcher {
 	private void execute(String str) {
 		_L.setTop(0);
 		int res = _L.doString(str);
+		StringBuffer OutputArrBuffer = new StringBuffer();
+		for (int i = 0; i < BaseLib.OutputArr.size(); ++i) {
+			String output = BaseLib.OutputArr.get(i);
+			if (i == BaseLib.OutputArr.size() - 1) {
+				OutputArrBuffer.append(output);
+			} else {
+				OutputArrBuffer.append(output).append("\n");
+			}
+		}
+		log(OutputArrBuffer.toString(), false);
 		if (res == 0) {
 			Object obj = _L.value(1);
 //			log(String(obj));
@@ -380,7 +390,10 @@ public class Launcher {
 	}
 	
 	private void log(String str) {
-		textAreaOutput.append(str + "\n");
+		log(str, true);
+	}
+	private void log(String str, boolean lineReturn) {
+		textAreaOutput.append(str + (lineReturn ? "\n" : ""));
 		textAreaInput.setText(null);
 		scrollToBottom(scrollPaneInput);
 	}

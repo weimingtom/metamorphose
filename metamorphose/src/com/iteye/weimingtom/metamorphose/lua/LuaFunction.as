@@ -114,7 +114,7 @@ package com.iteye.weimingtom.metamorphose.lua
 			  	throw new NullPointerException();
 			}
 			
-			this.env = env;
+			this._env = env;
 		}
 	}
 

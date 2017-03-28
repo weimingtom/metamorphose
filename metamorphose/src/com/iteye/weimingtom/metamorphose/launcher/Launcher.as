@@ -193,11 +193,11 @@ package com.iteye.weimingtom.metamorphose.launcher
 		
 		private function execute(str:String):void
 		{
-			PrintStream.init();
+			//PrintStream.init();
 			_L.setTop(0);
 			//trace(str);
 			var res:int = _L.doString(str);
-			log(PrintStream.OutputArr.join("\n"), false);
+			log(BaseLib.OutputArr.join("\n"), false);
 			if (res == 0)
 			{
 				var obj:Object = _L.value(1);

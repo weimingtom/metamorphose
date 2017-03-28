@@ -31,9 +31,9 @@
 //	http://code.google.com/p/jillcode/	
 package com.iteye.weimingtom.metamorphose.lua 
 {
-	import com.iteye.weimingtom.metamorphose.java.SystemUtil;
 	import com.iteye.weimingtom.metamorphose.java.Calendar;
 	import com.iteye.weimingtom.metamorphose.java.StringBuffer;
+	import com.iteye.weimingtom.metamorphose.java.SystemUtil;
 	import com.iteye.weimingtom.metamorphose.java.TimeZone;
 	
 	/**
@@ -51,7 +51,7 @@ package com.iteye.weimingtom.metamorphose.lua
 		private static const DIFFTIME:int = 3;
 		// EXECUTE = 4;
 		// EXIT = 5;
-		// GETENV = 6;
+		private static const GETENV:int = 6;
 		// REMOVE = 7;
 		// RENAME = 8;
 		private static const SETLOCALE:int = 9;
@@ -87,6 +87,9 @@ package com.iteye.weimingtom.metamorphose.lua
 			  
 				case DIFFTIME:
 					return difftime(L);
+					
+				case GETENV:
+					return getenv(L);
 			  
 				case SETLOCALE:
 					return setlocale(L);
@@ -109,6 +112,7 @@ package com.iteye.weimingtom.metamorphose.lua
 			r(L, "clock", CLOCK);
 			r(L, "date", DATE);
 			r(L, "difftime", DIFFTIME);
+			r(L, "getenv", GETENV);
 			r(L, "setlocale", SETLOCALE);
 			r(L, "time", TIME);
 		}
@@ -465,6 +469,20 @@ package com.iteye.weimingtom.metamorphose.lua
 				}
 			}
 			return w;
+		}
+		
+		//FIXME:not implemented
+		private static function getenv(L:Lua):int
+		{
+			var name:String = L.checkString(1);
+			//FIXME:
+			var value:String = null;
+			if (value == null) {
+				L.pushNil();
+			} else {
+				L.pushString(value);
+			}
+			return 1;
 		}
 	}
 }

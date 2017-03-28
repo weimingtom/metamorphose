@@ -26,7 +26,9 @@ package com.iteye.weimingtom.metamorphose.lua;
 
 import java.io.PrintStream;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
 /**
  * Contains Lua's base library.  The base library is generally
@@ -110,6 +112,8 @@ public final class BaseLib extends LuaJavaCallback
   private BaseLib(int which)
   {
     this.which = which;
+	OutputArr = new ArrayList<String>();
+	OutputArr.add("");
   }
 
   /** Instance constructor used by coroutine.wrap. */
@@ -549,6 +553,7 @@ public final class BaseLib extends LuaJavaCallback
    * their own instance which sent output to the screen of a JME device.
    */
   static final PrintStream OUT = System.out;
+  public static List<String> OutputArr;
 
   /** Implements print. */
   private static int print(Lua L)
@@ -567,11 +572,14 @@ public final class BaseLib extends LuaJavaCallback
       }
       if (i>1)
       {
+    	OutputArr.set(OutputArr.size() - 1,  OutputArr.get(OutputArr.size() - 1) + "\t");
         OUT.print('\t');
       }
+      OutputArr.set(OutputArr.size() - 1,  OutputArr.get(OutputArr.size() - 1) + s);
       OUT.print(s);
       L.pop(1);
     }
+    OutputArr.add("");
     OUT.println();
     return 0;
   }

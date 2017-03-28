@@ -47,7 +47,9 @@ package com.iteye.weimingtom.metamorphose.test
 					L.call(1, 1);
 					var errObjStr:String = L.toString(L.value(-1));
 					throw new Error("Error compiling : " + L.value(1));
-				} else {
+				} 
+				else 
+				{
 					var result:Object = L.value(1);
 					var tostring_:Object = L.getGlobal("tostring");
 					L.pushObject(tostring_);

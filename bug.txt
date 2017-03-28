@@ -1,11 +1,11 @@
-1. throw Error->throw new Error
-2. new Number(this._i); -> typeof(new Number()) === 'object'
-3. (TODO) throw new Error("IllegalArgumentException"); -> throw new XXX(); and so on...  
-4. (TODO) SystemUtil.currentTimeMillis
-5. (done) (TODO) lua_sources/bin/*.exe
-6. (TODO) Java PrintStream output to window (see as3 PrintStream class)  
-7. (TODO) Applet  
-8. (TODO) Lua.vmEqualRef : if (getQualifiedClassName(a) == getQualifiedClassName(b)) => xxx != xxx
+1. (done) throw Error->throw new Error
+2. (TODO) new Number(this._i); -> typeof(new Number()) === 'object'
+3. (done) throw new Error("IllegalArgumentException"); -> throw new XXX(); and so on...  
+4. (done) SystemUtil.currentTimeMillis
+5. (done) lua_sources/bin/*.exe
+6. (done) Java PrintStream output to window (see as3 PrintStream class)  
+7. (done) Applet  
+8. (done) Lua.vmEqualRef : if (getQualifiedClassName(a) == getQualifiedClassName(b)) => xxx != xxx
 9. (TODO) merge flexjs version
 10. (TODO) No IOLib implementation
-11. (TODO) LuaFunction: public function set env(env:LuaTable):void {...this.env = env;->this._env = env;
+11. (done) LuaFunction: public function set env(env:LuaTable):void {...this.env = env;->this._env = env;

@@ -29,6 +29,7 @@
 package com.iteye.weimingtom.metamorphose.lua 
 {
 	import com.iteye.weimingtom.metamorphose.java.Hashtable;
+	import com.iteye.weimingtom.metamorphose.java.IllegalArgumentException;
 	
 	/**
 	 * Used to model a function during compilation.  Code generation uses
@@ -422,7 +423,7 @@ package com.iteye.weimingtom.metamorphose.lua
 					break;
 				
 				default:
-					throw new Error("IllegalArgumentException");
+					throw new IllegalArgumentException();
 			}
 		}
 

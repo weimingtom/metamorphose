@@ -56,9 +56,9 @@ package com.iteye.weimingtom.metamorphose.test
 			{label:"Bisection method for solving non-linear equations", asset:_bisectClass},
 			{label:"Temperature conversion table (celsius to farenheit)", asset:_cfClass},
 			{label:"Echo command line arguments", asset:_echoClass}, //miss
-			{label:"Environment variables as automatic global variables", asset:_envClass},
-			{label:"Factorial without recursion", asset:_factorialClass},
-			{test:true, label:"Fibonacci function with cache", asset:_fibClass},
+			{test:true, label:"Environment variables as automatic global variables", asset:_envClass},
+			{test:false, label:"Factorial without recursion", asset:_factorialClass},
+			{test:false, label:"Fibonacci function with cache", asset:_fibClass},
 			{label:"Fibonacci numbers with coroutines and generators", asset:_fibforClass},
 			{label:"Report global variable usage", asset:_globalsClass}, //miss
 			{label:"The first program in every language", asset:_helloClass}, //miss
@@ -122,7 +122,9 @@ package com.iteye.weimingtom.metamorphose.test
 					L.call(1, 1);
 					var errObjStr:String = L.toString(L.value(-1));
 					throw new Error("Error compiling : " + L.value(1));
-				} else {
+				} 
+				else 
+				{
 					var result:Object = L.value(1);
 					var tostring_:Object = L.getGlobal("tostring");
 					L.pushObject(tostring_);

@@ -28,7 +28,11 @@
 //	http://code.google.com/p/jillcode/	
 package com.iteye.weimingtom.metamorphose.lua 
 {
+	import com.iteye.weimingtom.metamorphose.java.EOFException;
+	import com.iteye.weimingtom.metamorphose.java.IOException;
 	import com.iteye.weimingtom.metamorphose.java.InputStream;
+	import com.iteye.weimingtom.metamorphose.java.NullPointerException;
+	
 	import flash.utils.ByteArray;
 	
 	/**
@@ -49,7 +53,6 @@ package com.iteye.weimingtom.metamorphose.lua
 	 */
 	public final class Loader
 	{
-		import com.iteye.weimingtom.metamorphose.java.NullPointerException;
 		
 	    /**
 	     * Whether integers in the binary chunk are stored big-endian or
@@ -124,7 +127,7 @@ package com.iteye.weimingtom.metamorphose.lua
 		{
 			var n:int = _in.readBytes(b);
 			if (n != b.length)
-				throw new Error("EOFException");
+				throw new EOFException();
 		}
 
 		/**
@@ -135,7 +138,7 @@ package com.iteye.weimingtom.metamorphose.lua
 		{
 			var c:int = _in.read() ;
 			if (c == -1)
-				throw new Error("EOFException");
+				throw new EOFException();
 			else
 				return c & 0xFF ;  // paranoia
 		}
@@ -200,7 +203,7 @@ package com.iteye.weimingtom.metamorphose.lua
 						var b:int = byteLoad();
 						// assert b >= 0;
 						if (b > 1)
-							throw new Error("IOException");
+							throw new IOException();
 						k[i] = new Slot();
 						(k[i] as Slot).init2(Lua.valueOfBoolean(b != 0));
 						break;
@@ -216,7 +219,7 @@ package com.iteye.weimingtom.metamorphose.lua
 						break;
 
 					default:
-						throw new Error("IOException");
+						throw new IOException();
 				}
 			}
 			return k;
@@ -315,7 +318,7 @@ package com.iteye.weimingtom.metamorphose.lua
 			// That means that the legal values for this field ar 0,1,2,3.
 			if (varargByte < 0 || varargByte > 3)
 			{
-				throw new Error("IOException");
+				throw new IOException();
 			}
 			vararg = (0 != varargByte);
 			maxstacksize = this.byteLoad();
@@ -400,7 +403,7 @@ package com.iteye.weimingtom.metamorphose.lua
 			
 			if (buf[6] < 0 || buf[6] > 1 || !arrayEquals(HEADER, arrBuf))
 			{
-				throw new Error("IOException");
+				throw new IOException();
 			}
 			this._bigendian = (buf[6] == 0);
 		}
@@ -526,7 +529,7 @@ package com.iteye.weimingtom.metamorphose.lua
 			block(buf);
 			// Discard trailing NUL byte
 			if (_in.read() == -1)
-			  throw new Error("EOFException") ;
+			  throw new EOFException() ;
 
 			return buf.readUTFBytes(size - 1); //(new String(buf, "UTF-8")).intern();
 		}

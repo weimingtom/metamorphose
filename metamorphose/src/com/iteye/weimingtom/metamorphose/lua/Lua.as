@@ -3024,7 +3024,7 @@ package com.iteye.weimingtom.metamorphose.lua
 			}
 			//TODO:
 			//if (a.getClass != b.getClass())
-			if (getQualifiedClassName(a) == getQualifiedClassName(b))
+			if (getQualifiedClassName(a) != getQualifiedClassName(b))
 			{
 				return false;
 			}
