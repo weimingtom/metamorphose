@@ -1,0 +1,12 @@
+
+This benchmark package is setup to compare Lua VMs: lua, luajit, llvm-lua and native compiled lua scripts.
+
+To setup llvm-lua-0.2 for benchmarking
+======================================
+* run command: ./setup_llvm-lus.sh <path to llvm-lua & lua_vm_ops.bc>
+
+
+To run benchmark
+================
+* run command: ./benchmark.sh
+

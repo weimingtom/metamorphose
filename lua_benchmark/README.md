@@ -13,6 +13,9 @@
 
 * tdzl2003/lua.js  
 	https://github.com/tdzl2003/lua.js  
+	
+* lua_bench-0.1  
+	llvm-lua  
 
 # Other  
 * https://github.com/adamwiggins/lua-pong  
