@@ -54,9 +54,9 @@ package com.iteye.weimingtom.metamorphose.test
 		
 		private static var _embeddedLuaFiles:Array = [
 			{label:"Bisection method for solving non-linear equations", asset:_bisectClass},
-			{label:"Temperature conversion table (celsius to farenheit)", asset:_cfClass},
+			{test:true, label:"Temperature conversion table (celsius to farenheit)", asset:_cfClass},
 			{label:"Echo command line arguments", asset:_echoClass}, //miss
-			{test:true, label:"Environment variables as automatic global variables", asset:_envClass},
+			{test:false, label:"Environment variables as automatic global variables", asset:_envClass},
 			{test:false, label:"Factorial without recursion", asset:_factorialClass},
 			{test:false, label:"Fibonacci function with cache", asset:_fibClass},
 			{label:"Fibonacci numbers with coroutines and generators", asset:_fibforClass},

@@ -18,3 +18,31 @@
 	<-formatFloatRawE
 		var s:String = d.toPrecision(20);//String(d); //FIXME:整数转浮点
 		
+-------------------
+
+
+打印opcode
+
+				//20170402:added
+				if (D) 
+				{
+					//usage:luac -l cf.lua
+					for (var i_test:int = 0; i_test < code.length; i_test++) 
+					{
+						var name1:String = getOpcodeName(OPCODE(code[i_test]));
+						trace(">>>OPCODE(code(" + (i_test + 1) + ")) == " + name1);
+					}
+				}				
+				
+------------------
+
+打印pc和opcode
+
+					//20170402:added
+					if (D) {
+						var name2:String = getOpcodeName(OPCODE(i));
+						trace(">>>pc == " + pc + ", name == " + name2);
+					}
+
+
+		

@@ -36,7 +36,7 @@ package com.iteye.weimingtom.metamorphose.lua
 	 * Contains Lua's string library.
 	 * The library can be opened using the {@link #open} method.
 	 */
-	public final class StringLib
+	public final class StringLib extends LuaJavaCallback
 	{
 		// Each function in the string library corresponds to an instance of
 		// this class which is associated (the 'which' member) with an integer
@@ -90,7 +90,7 @@ package com.iteye.weimingtom.metamorphose.lua
 		 * @param L  the Lua state in which to execute.
 		 * @return number of returned parameters, as per convention.
 		 */
-		public function luaFunction(L:Lua):int
+		override public function luaFunction(L:Lua):int
 		{
 			switch (this._which)
 			{

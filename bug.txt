@@ -9,3 +9,5 @@
 9. (TODO) merge flexjs version
 10. (TODO) No IOLib implementation
 11. (done) LuaFunction: public function set env(env:LuaTable):void {...this.env = env;->this._env = env;
+12. (done) Lua.as, vmExecute: case OP_CALL: ... if (b != 0) ... a + b -> if (b_CALL != 0) ... a + b_CALL
+13. (done) public final class StringLib -> public final class StringLib extends LuaJavaCallback

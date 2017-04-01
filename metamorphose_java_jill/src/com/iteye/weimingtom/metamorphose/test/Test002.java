@@ -19,16 +19,85 @@ import com.iteye.weimingtom.metamorphose.lua.StringLib;
 import com.iteye.weimingtom.metamorphose.lua.TableLib;
 
 public class Test002 {
-	private static String fib_lua = "assets/accept-basic/fib.lua";
+	private static String _bisectClass = "assets/accept-basic/bisect.lua";
+	private static String _cfClass = "assets/accept-basic/cf.lua";
+	private static String _echoClass = "assets/accept-basic/echo.lua"; //miss
+	private static String _envClass = "assets/accept-basic/env.lua";
+	private static String _factorialClass = "assets/accept-basic/factorial.lua";
+	private static String _fibClass = "assets/accept-basic/fib.lua";
+	private static String _fibforClass = "assets/accept-basic/fibfor.lua";
+	private static String _globalsClass = "assets/accept-basic/globals.lua"; //miss
+	private static String _helloClass = "assets/accept-basic/hello.lua"; //miss
+	private static String _lifeClass = "assets/accept-basic/life.lua";
+	private static String _luacClass = "assets/accept-basic/luac.lua"; //miss
+	private static String _printfClass = "assets/accept-basic/printf.lua";
+	private static String _readonlyClass = "assets/accept-basic/readonly.lua";
+	private static String _sieveClass = "assets/accept-basic/sieve.lua";
+	private static String _sortClass = "assets/accept-basic/sort.lua";
+	private static String _tableClass = "assets/accept-basic/table.lua"; //miss
+	private static String _traceCallsClass = "assets/accept-basic/trace-calls.lua"; //miss
+	private static String _traceGlobalsClass = "assets/accept-basic/trace-globals.lua"; //miss
+	private static String _xdClass = "assets/accept-basic/xd.lua"; //miss
+	
+	private final static class LuaFile {
+		public boolean test;
+		public String label;
+		public String asset;
+		public String code;
+		
+		public LuaFile() {
+			
+		}
+		
+		public LuaFile(boolean test, String label, String asset) {
+			this.test = test;
+			this.label = label;
+			this.asset = asset;
+		}
+		
+		public LuaFile(String label, String asset) {
+			this(false, label, asset);
+		}
+	}
+	
+	private static LuaFile[] _embeddedLuaFiles = {
+		new LuaFile("Bisection method for solving non-linear equations", _bisectClass),
+		new LuaFile(true, "Temperature conversion table (celsius to farenheit)", _cfClass),
+		new LuaFile("Echo command line arguments", _echoClass), //miss
+		new LuaFile(false, "Environment variables as automatic global variables", _envClass),
+		new LuaFile(false, "Factorial without recursion", _factorialClass),
+		new LuaFile(false, "Fibonacci function with cache", _fibClass),
+		new LuaFile("Fibonacci numbers with coroutines and generators", _fibforClass),
+		new LuaFile("Report global variable usage", _globalsClass), //miss
+		new LuaFile("The first program in every language", _helloClass), //miss
+		new LuaFile("Conway's Game of Life", _lifeClass),
+		new LuaFile("Bare-bones luac", _luacClass), //miss
+		new LuaFile("An implementation of printf", _printfClass),
+		new LuaFile("The sieve of of Eratosthenes programmed with coroutines", _readonlyClass),
+		new LuaFile("Make global variables readonly", _sieveClass),
+		new LuaFile("Two implementations of a sort function", _sortClass),
+		new LuaFile("Make table, grouping all data for the same item", _tableClass), //miss
+		new LuaFile("Trace calls", _traceCallsClass), //miss
+		new LuaFile("Trace assigments to global variables", _traceGlobalsClass), //miss
+		new LuaFile("Hex dump", _xdClass),//miss
+	};
 	
 	public static void main(String[] args) {
 		System.out.println("Start test...");
-		List<String> code = new ArrayList<String>();
-		code.add(clsToUTF8(fib_lua));
 		
+		List<LuaFile> code = new ArrayList<LuaFile>();
+		for (LuaFile luaFile : _embeddedLuaFiles) {
+			String luaString = clsToUTF8(luaFile.asset);
+			LuaFile item = new LuaFile();
+			item.test = luaFile.test; 
+			item.label = luaFile.label; 
+			item.code = luaString;
+			code.add(item);
+		}
 		for (int i = 0; i < code.size(); ++i) {
-			if (i == 0) {
-				runScript(code.get(i));
+			if (code.get(i).test) {
+				System.out.println(code.get(i).label);
+				runScript(code.get(i).code);
 			}
 		}
 	}

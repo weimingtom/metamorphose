@@ -2990,6 +2990,127 @@ protect:
    */
   private static final double[] NUMOP = new double[2];
 
+  public static String getOpcodeName(int code) {
+	  String name = "";
+	  switch (code) {
+  	  case OP_MOVE: 
+		  name = "OP_MOVE"; 
+		  break;
+	  case OP_LOADK:
+		  name = "OP_LOADK"; 
+		  break;
+	  case OP_LOADBOOL:
+		  name = "OP_LOADBOOL"; 
+		  break;
+	  case OP_LOADNIL:
+		  name = "OP_LOADNIL"; 
+		  break;
+	  case OP_GETUPVAL:
+		  name = "OP_GETUPVAL"; 
+		  break;
+	  case OP_GETGLOBAL:
+		  name = "OP_GETGLOBAL"; 
+		  break;
+	  case OP_GETTABLE:
+		  name = "OP_GETTABLE"; 
+		  break;
+	  case OP_SETGLOBAL:
+		  name = "OP_SETGLOBAL"; 
+		  break;
+	  case OP_SETUPVAL:
+		  name = "OP_SETUPVAL"; 
+		  break;
+	  case OP_SETTABLE:
+		  name = "OP_SETTABLE"; 
+		  break;
+	  case OP_NEWTABLE:
+		  name = "OP_NEWTABLE"; 
+		  break;
+	  case OP_SELF:
+		  name = "OP_SELF"; 
+		  break;
+	  case OP_ADD:
+		  name = "OP_ADD"; 
+		  break;
+	  case OP_SUB:
+		  name = "OP_SUB"; 
+		  break;
+	  case OP_MUL:
+		  name = "OP_MUL"; 
+		  break;
+	  case OP_DIV:
+		  name = "OP_DIV"; 
+		  break;
+	  case OP_MOD:
+		  name = "OP_MOD"; 
+		  break;
+	  case OP_POW:
+		  name = "OP_POW"; 
+		  break;
+	  case OP_UNM:
+		  name = "OP_UNM"; 
+		  break;
+	  case OP_NOT:
+		  name = "OP_NOT"; 
+		  break;
+	  case OP_LEN:
+		  name = "OP_LEN"; 
+		  break;
+	  case OP_CONCAT:
+		  name = "OP_CONCAT"; 
+		  break;
+	  case OP_JMP:
+		  name = "OP_JMP"; 
+		  break;
+	  case OP_EQ:
+		  name = "OP_EQ"; 
+		  break;
+	  case OP_LT:
+		  name = "OP_LT"; 
+		  break;
+	  case OP_LE:
+		  name = "OP_LE"; 
+		  break;
+	  case OP_TEST:
+		  name = "OP_TEST"; 
+		  break;
+	  case OP_TESTSET:
+		  name = "OP_TESTSET"; 
+		  break;
+	  case OP_CALL:
+		  name = "OP_CALL"; 
+		  break;
+	  case OP_TAILCALL:
+		  name = "OP_TAILCALL"; 
+		  break;
+	  case OP_RETURN:
+		  name = "OP_RETURN"; 
+		  break;
+	  case OP_FORLOOP:
+		  name = "OP_FORLOOP"; 
+		  break;
+	  case OP_FORPREP:
+		  name = "OP_FORPREP"; 
+		  break;
+	  case OP_TFORLOOP:
+		  name = "OP_TFORLOOP"; 
+		  break;
+	  case OP_SETLIST:
+		  name = "OP_SETLIST"; 
+		  break;
+	  case OP_CLOSE:
+		  name = "OP_CLOSE"; 
+		  break;
+	  case OP_CLOSURE:
+		  name = "OP_CLOSURE"; 
+		  break;
+	  case OP_VARARG:
+		  name = "OP_VARARG"; 
+		  break;
+	  }
+	  return name;
+  }
+  
   /** The core VM execution engine. */
   private void vmExecute(int nexeccalls)
   {
@@ -3007,6 +3128,15 @@ reentry:
       Slot[] k = proto.constant();
       int pc = savedpc;
 
+      //20170402:added
+      if (D) {
+	      //usage:luac -l cf.lua
+	      for (int i_test = 0; i_test < code.length; i_test++) {
+	    	  String name1 = getOpcodeName(OPCODE(code[i_test]));
+	    	  System.err.println(">>>OPCODE(code(" + (i_test + 1) + ")) == " + name1);
+	      }
+      }
+      
       while (true)        // main loop of interpreter
       {
 
@@ -3034,6 +3164,12 @@ reentry:
         Slot rb;
         Slot rc;
 
+        //20170402:added
+        if (D) {
+        	String name2 = getOpcodeName(OPCODE(i));
+        	System.err.println(">>>pc == " + pc + ", name == " + name2);
+        }
+        
         switch (OPCODE(i))
         {
           case OP_MOVE:
@@ -4113,6 +4249,12 @@ reentry:
 	  if(n == 3) {
 		  if (D) {
 			  System.err.println("stacksetsize:"+n);
+		  }
+	  }
+	  //20170402:added
+	  if (n == 7) {
+		  if (D) {
+			  System.err.println(">>>stacksetsize:"+n);
 		  }
 	  }
     // It is absolutely critical that when the stack changes sizes those
