@@ -3232,7 +3232,8 @@ package com.iteye.weimingtom.metamorphose.lua
 					var rc:Slot;
 						
 					//20170402:added
-					if (D) {
+					if (D) 
+					{
 						var name2:String = getOpcodeName(OPCODE(i));
 						trace(">>>pc == " + pc + ", name == " + name2);
 					}

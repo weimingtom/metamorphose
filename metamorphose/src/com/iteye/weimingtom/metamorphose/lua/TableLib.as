@@ -48,6 +48,7 @@ package com.iteye.weimingtom.metamorphose.lua
 		private static const MAXN:int = 3;
 		private static const REMOVE:int = 4;
 		private static const SORT:int = 5;
+		private static const GETN:int = 6;
   
 		/**
 		 * Which library function this object represents.  This value should
@@ -85,6 +86,10 @@ package com.iteye.weimingtom.metamorphose.lua
 		  
 				case SORT:
 					return sort(L);
+					
+				//FIXME: added
+				case GETN:
+					return getn(L);	
 			}
 			return 0;
 		}
@@ -101,6 +106,7 @@ package com.iteye.weimingtom.metamorphose.lua
 
 			r(L, "concat", CONCAT);
 			r(L, "insert", INSERT);
+			r(L, "getn", GETN); //FIXME: added
 			r(L, "maxn", MAXN);
 			r(L, "remove", REMOVE);
 			r(L, "sort", SORT);
@@ -333,6 +339,13 @@ package com.iteye.weimingtom.metamorphose.lua
 			L.checkType(n, Lua.TTABLE);
 			var t:LuaTable = L.value(n) as LuaTable;
 			return t.getn();
+		}
+		
+		//FIXME: added
+		private static function getn(L:Lua):int 
+		{
+			L.pushNumber(aux_getn(L, 1));
+			return 1;
 		}
 	}
 }

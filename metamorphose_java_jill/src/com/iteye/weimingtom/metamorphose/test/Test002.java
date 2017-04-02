@@ -44,6 +44,7 @@ public class Test002 {
 		public String label;
 		public String asset;
 		public String code;
+		public String filename;
 		
 		public LuaFile() {
 			
@@ -62,8 +63,8 @@ public class Test002 {
 	
 	private static LuaFile[] _embeddedLuaFiles = {
 		new LuaFile("Bisection method for solving non-linear equations", _bisectClass),
-		new LuaFile(true, "Temperature conversion table (celsius to farenheit)", _cfClass),
-		new LuaFile("Echo command line arguments", _echoClass), //miss
+		new LuaFile(false, "Temperature conversion table (celsius to farenheit)", _cfClass),
+		new LuaFile(true, "Echo command line arguments", _echoClass), //miss
 		new LuaFile(false, "Environment variables as automatic global variables", _envClass),
 		new LuaFile(false, "Factorial without recursion", _factorialClass),
 		new LuaFile(false, "Fibonacci function with cache", _fibClass),
@@ -92,20 +93,21 @@ public class Test002 {
 			item.test = luaFile.test; 
 			item.label = luaFile.label; 
 			item.code = luaString;
+			item.filename = luaFile.asset;
 			code.add(item);
 		}
 		for (int i = 0; i < code.size(); ++i) {
 			if (code.get(i).test) {
 				System.out.println(code.get(i).label);
-				runScript(code.get(i).code);
+				runScript(code.get(i).code, code.get(i).filename);
 			}
 		}
 	}
 
-	public static void runScript(String code) {
+	public static void runScript(String code, String filename) {
 		final boolean isLoadLib = true;
 		final boolean useArg = true;
-		final String[] argv = new String[]{"hello", "world"};
+		final String[] argv = new String[]{};
 		try {
 			Lua L = new Lua();
 			if (isLoadLib) {
@@ -122,6 +124,7 @@ public class Test002 {
 				//@see http://www.ttlsa.com/lua/lua-install-and-lua-variable-ttlsa/
 				int narg = argv.length;
 				LuaTable tbl = L.createTable(narg, narg);
+				L.rawSetI(tbl, 0, filename);
 				for (int i = 0; i < narg; i++) {
 					L.rawSetI(tbl, i, argv[i]);
 				}

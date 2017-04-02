@@ -2,6 +2,7 @@ package com.iteye.weimingtom.metamorphose.test
 {
 	import com.iteye.weimingtom.metamorphose.lua.BaseLib;
 	import com.iteye.weimingtom.metamorphose.lua.Lua;
+	import com.iteye.weimingtom.metamorphose.lua.LuaTable;
 	import com.iteye.weimingtom.metamorphose.lua.MathLib;
 	import com.iteye.weimingtom.metamorphose.lua.OSLib;
 	import com.iteye.weimingtom.metamorphose.lua.PackageLib;
@@ -53,25 +54,25 @@ package com.iteye.weimingtom.metamorphose.test
 		private static var _xdClass:Class; //miss
 		
 		private static var _embeddedLuaFiles:Array = [
-			{label:"Bisection method for solving non-linear equations", asset:_bisectClass},
-			{test:true, label:"Temperature conversion table (celsius to farenheit)", asset:_cfClass},
-			{label:"Echo command line arguments", asset:_echoClass}, //miss
-			{test:false, label:"Environment variables as automatic global variables", asset:_envClass},
-			{test:false, label:"Factorial without recursion", asset:_factorialClass},
-			{test:false, label:"Fibonacci function with cache", asset:_fibClass},
-			{label:"Fibonacci numbers with coroutines and generators", asset:_fibforClass},
-			{label:"Report global variable usage", asset:_globalsClass}, //miss
-			{label:"The first program in every language", asset:_helloClass}, //miss
-			{label:"Conway's Game of Life", asset:_lifeClass},
-			{label:"Bare-bones luac", asset:_luacClass}, //miss
-			{label:"An implementation of printf", asset:_printfClass},
-			{label:"The sieve of of Eratosthenes programmed with coroutines", asset:_readonlyClass},
-			{label:"Make global variables readonly", asset:_sieveClass},
-			{label:"Two implementations of a sort function", asset:_sortClass},
-			{label:"Make table, grouping all data for the same item", asset:_tableClass}, //miss
-			{label:"Trace calls", asset:_traceCallsClass}, //miss
-			{label:"Trace assigments to global variables", asset:_traceGlobalsClass}, //miss
-			{label:"Hex dump", asset:_xdClass},//miss
+			{label:"Bisection method for solving non-linear equations", asset:_bisectClass, filename:"assets/accept-basic/bisect.lua"},
+			{test:false, label:"Temperature conversion table (celsius to farenheit)", asset:_cfClass, filename:"assets/accept-basic/cf.lua"},
+			{test:true, label:"Echo command line arguments", asset:_echoClass, filename:"assets/accept-basic/echo.lua"}, //miss
+			{test:false, label:"Environment variables as automatic global variables", asset:_envClass, filename:"assets/accept-basic/env.lua"},
+			{test:false, label:"Factorial without recursion", asset:_factorialClass, filename:"assets/accept-basic/factorial.lua"},
+			{test:false, label:"Fibonacci function with cache", asset:_fibClass, filename:"assets/accept-basic/fib.lua"},
+			{label:"Fibonacci numbers with coroutines and generators", asset:_fibforClass, filename:"assets/accept-basic/fibfor.lua"},
+			{label:"Report global variable usage", asset:_globalsClass, filename:"assets/accept-basic/globals.lua"}, //miss
+			{label:"The first program in every language", asset:_helloClass, filename:"assets/accept-basic/hello.lua"}, //miss
+			{label:"Conway's Game of Life", asset:_lifeClass, filename:"assets/accept-basic/life.lua"},
+			{label:"Bare-bones luac", asset:_luacClass, filename:"assets/accept-basic/luac.lua"}, //miss
+			{label:"An implementation of printf", asset:_printfClass, filename:"assets/accept-basic/printf.lua"},
+			{label:"The sieve of of Eratosthenes programmed with coroutines", asset:_readonlyClass, filename:"assets/accept-basic/readonly.lua"},
+			{label:"Make global variables readonly", asset:_sieveClass, filename:"assets/accept-basic/sieve.lua"},
+			{label:"Two implementations of a sort function", asset:_sortClass, filename:"assets/accept-basic/sort.lua"},
+			{label:"Make table, grouping all data for the same item", asset:_tableClass, filename:"assets/accept-basic/table.lua"}, //miss
+			{label:"Trace calls", asset:_traceCallsClass, filename:"assets/accept-basic/trace-calls.lua"}, //miss
+			{label:"Trace assigments to global variables", asset:_traceGlobalsClass, filename:"assets/accept-basic/trace-globals.lua"}, //miss
+			{label:"Hex dump", asset:_xdClass, filename:"assets/accept-basic/xd.lua"},//miss
 		];
 		
 		public function Test002()
@@ -84,7 +85,8 @@ package com.iteye.weimingtom.metamorphose.test
 				code.push({
 					test:luaFile.test, 
 					label:luaFile.label, 
-					code:luaString
+					code:luaString,
+					filename:luaFile.filename
 				});
 			}
 			for (var i:int = 0; i < code.length; ++i) 
@@ -92,14 +94,16 @@ package com.iteye.weimingtom.metamorphose.test
 				if (code[i].test)
 				{
 					trace(code[i].label);
-					runScript(code[i].code);
+					runScript(code[i].code, code[i].filename);
 				}
 			}
 		}
 
-		public static function runScript(code:String):void 
+		public static function runScript(code:String, filename:String):void 
 		{
 			const isLoadLib:Boolean = true;
+			const useArg:Boolean = true;
+			var argv:Array = [];
 			try
 			{
 				var L:Lua = new Lua();
@@ -111,6 +115,19 @@ package com.iteye.weimingtom.metamorphose.test
 					OSLib.open(L);
 					StringLib.open(L);
 					TableLib.open(L);
+				}
+				if (useArg) 
+				{
+					//FIXME: index may be minus (for example, arg[-1], before script file name)
+					//@see http://www.ttlsa.com/lua/lua-install-and-lua-variable-ttlsa/
+					var narg:int = argv.length;
+					var tbl:LuaTable = L.createTable(narg, narg);
+					L.rawSetI(tbl, 0, filename);
+					for (var i:int = 0; i < narg; i++) 
+					{
+						L.rawSetI(tbl, i + 1, argv[i]);
+					}
+					L.setGlobal("arg", tbl);
 				}
 				var status:int = L.doString(code);
 				if (status != 0)
