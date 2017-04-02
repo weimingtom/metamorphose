@@ -62,12 +62,12 @@ package com.iteye.weimingtom.metamorphose.java
 		public function _delete(start:int, end:int):StringBuffer
 		{
 			//trace("StringBuffer._delete(" + start + "," + end + ")");
-			if(end > this._str.length)
+			if (end > this._str.length)
 			{
 				end = this._str.length; //end可能是个过大的数
 			}
 			
-			if(0 <= start && start < end && end <= this._str.length)
+			if (0 <= start && start < end && end <= this._str.length)
 			{
 				this._str = this._str.substring(0, start) + 
 					this._str.substring(end);

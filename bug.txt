@@ -1,4 +1,4 @@
-1. (done) throw Error->throw new Error
+﻿1. (done) throw Error->throw new Error
 2. (TODO) new Number(this._i); -> typeof(new Number()) === 'object'
 3. (done) throw new Error("IllegalArgumentException"); -> throw new XXX(); and so on...  
 4. (done) SystemUtil.currentTimeMillis
@@ -10,6 +10,13 @@
 10. (TODO) No IOLib implementation
 11. (done) LuaFunction: public function set env(env:LuaTable):void {...this.env = env;->this._env = env;
 12. (done) Lua.as, vmExecute: case OP_CALL: ... if (b != 0) ... a + b -> if (b_CALL != 0) ... a + b_CALL
-13. (done) public final class StringLib -> public final class StringLib extends LuaJavaCallback
+13. (done) public final class StringLib -> public final class StringLib extends LuaJavaCallback ... override luaFunction
 14. (done) OSLib.getenv
 15. (done) TableLib.getn
+16. (done) public final class MathLib -> public final class MathLib extends LuaJavaCallback ... override luaFunction
+17. (done) FormatItem.as, formatFloatRawE
+//FIXME:如果使用toPrecision会消除掉中间的e指数符号
+var s:String = String(d).toUpperCase(); //d.toPrecision(this._precision);//String(d); //FIXME:整数转浮点问题
+18. (done) FormatItem.as, formatFloatRawF
+//toPrecision
+var s:String = String(d);//d.toPrecision(this._precision);//String(d); //FIXME:整数转字符串会丢失小数点后1位精度

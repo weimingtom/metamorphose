@@ -54,9 +54,9 @@ package com.iteye.weimingtom.metamorphose.test
 		private static var _xdClass:Class; //miss
 		
 		private static var _embeddedLuaFiles:Array = [
-			{label:"Bisection method for solving non-linear equations", asset:_bisectClass, filename:"assets/accept-basic/bisect.lua"},
+			{test:true, label:"Bisection method for solving non-linear equations", asset:_bisectClass, filename:"assets/accept-basic/bisect.lua"},
 			{test:false, label:"Temperature conversion table (celsius to farenheit)", asset:_cfClass, filename:"assets/accept-basic/cf.lua"},
-			{test:true, label:"Echo command line arguments", asset:_echoClass, filename:"assets/accept-basic/echo.lua"}, //miss
+			{test:false, label:"Echo command line arguments", asset:_echoClass, filename:"assets/accept-basic/echo.lua"}, //miss
 			{test:false, label:"Environment variables as automatic global variables", asset:_envClass, filename:"assets/accept-basic/env.lua"},
 			{test:false, label:"Factorial without recursion", asset:_factorialClass, filename:"assets/accept-basic/factorial.lua"},
 			{test:false, label:"Fibonacci function with cache", asset:_fibClass, filename:"assets/accept-basic/fib.lua"},
@@ -107,7 +107,7 @@ package com.iteye.weimingtom.metamorphose.test
 			try
 			{
 				var L:Lua = new Lua();
-				if(isLoadLib)
+				if (isLoadLib)
 				{
 					BaseLib.open(L);
 					PackageLib.open(L);

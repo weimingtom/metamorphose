@@ -62,9 +62,9 @@ public class Test002 {
 	}
 	
 	private static LuaFile[] _embeddedLuaFiles = {
-		new LuaFile("Bisection method for solving non-linear equations", _bisectClass),
+		new LuaFile(true, "Bisection method for solving non-linear equations", _bisectClass),
 		new LuaFile(false, "Temperature conversion table (celsius to farenheit)", _cfClass),
-		new LuaFile(true, "Echo command line arguments", _echoClass), //miss
+		new LuaFile(false, "Echo command line arguments", _echoClass), //miss
 		new LuaFile(false, "Environment variables as automatic global variables", _envClass),
 		new LuaFile(false, "Factorial without recursion", _factorialClass),
 		new LuaFile(false, "Fibonacci function with cache", _fibClass),
