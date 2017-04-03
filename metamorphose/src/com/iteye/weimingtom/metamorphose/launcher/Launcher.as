@@ -194,6 +194,8 @@ package com.iteye.weimingtom.metamorphose.launcher
 		private function execute(str:String):void
 		{
 			//PrintStream.init();
+			BaseLib.OutputArr = [];
+			BaseLib.OutputArr.push("");
 			_L.setTop(0);
 			//trace(str);
 			var res:int = _L.doString(str);

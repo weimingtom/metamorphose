@@ -329,6 +329,8 @@ public class Launcher {
 	
 	private void execute(String str) {
 		_L.setTop(0);
+		BaseLib.OutputArr = new ArrayList<String>();
+		BaseLib.OutputArr.add("");
 		int res = _L.doString(str);
 		StringBuffer OutputArrBuffer = new StringBuffer();
 		for (int i = 0; i < BaseLib.OutputArr.size(); ++i) {
