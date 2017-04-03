@@ -103,7 +103,7 @@ package com.iteye.weimingtom.metamorphose.lua
 			DumpInt(n);
 			for (var i:int = 0 ; i < n ; i++)
 			{
-				var o:Object = k[i].r;
+				var o:Object = (k[i] as Slot).r;
 				if (o == Lua.NIL)
 				{
 					this._writer.writeByte(Lua.TNIL);
@@ -116,7 +116,7 @@ package com.iteye.weimingtom.metamorphose.lua
 				else if (o == Lua.NUMBER)
 				{
 					this._writer.writeByte(Lua.TNUMBER);
-					DumpNumber(k[i].d);
+					DumpNumber((k[i] as Slot).d);
 				}
 				else if (o is String)
 				{

@@ -3251,7 +3251,7 @@ package com.iteye.weimingtom.metamorphose.lua
 							if (D) 
 							{
 								trace("OP_LOADK:stack[" + (this._base+a) + 
-									"]=k[" + ARGBx(i) + "]=" + k[ARGBx(i)].d);
+									"]=k[" + ARGBx(i) + "]=" + (k[ARGBx(i)] as Slot).d);
 							}
 							continue;
 				  

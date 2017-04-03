@@ -68,7 +68,7 @@ public class Test002 {
 		new LuaFile(false, "Environment variables as automatic global variables", _envClass),
 		new LuaFile(false, "Factorial without recursion", _factorialClass),
 		new LuaFile(false, "Fibonacci function with cache", _fibClass),
-		new LuaFile("Fibonacci numbers with coroutines and generators", _fibforClass),
+		new LuaFile(false, "Fibonacci numbers with coroutines and generators", _fibforClass),
 		new LuaFile("Report global variable usage", _globalsClass), //miss
 		new LuaFile("The first program in every language", _helloClass), //miss
 		new LuaFile("Conway's Game of Life", _lifeClass),

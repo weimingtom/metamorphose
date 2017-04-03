@@ -60,15 +60,15 @@ package com.iteye.weimingtom.metamorphose.test
 			{test:false, label:"Environment variables as automatic global variables", asset:_envClass, filename:"assets/accept-basic/env.lua"},
 			{test:false, label:"Factorial without recursion", asset:_factorialClass, filename:"assets/accept-basic/factorial.lua"},
 			{test:false, label:"Fibonacci function with cache", asset:_fibClass, filename:"assets/accept-basic/fib.lua"},
-			{label:"Fibonacci numbers with coroutines and generators", asset:_fibforClass, filename:"assets/accept-basic/fibfor.lua"},
+			{test:false, label:"Fibonacci numbers with coroutines and generators", asset:_fibforClass, filename:"assets/accept-basic/fibfor.lua"},
 			{label:"Report global variable usage", asset:_globalsClass, filename:"assets/accept-basic/globals.lua"}, //miss
 			{label:"The first program in every language", asset:_helloClass, filename:"assets/accept-basic/hello.lua"}, //miss
-			{label:"Conway's Game of Life", asset:_lifeClass, filename:"assets/accept-basic/life.lua"},
+			{test:false, label:"Conway's Game of Life", asset:_lifeClass, filename:"assets/accept-basic/life.lua"},
 			{label:"Bare-bones luac", asset:_luacClass, filename:"assets/accept-basic/luac.lua"}, //miss
 			{label:"An implementation of printf", asset:_printfClass, filename:"assets/accept-basic/printf.lua"},
 			{label:"The sieve of of Eratosthenes programmed with coroutines", asset:_readonlyClass, filename:"assets/accept-basic/readonly.lua"},
 			{label:"Make global variables readonly", asset:_sieveClass, filename:"assets/accept-basic/sieve.lua"},
-			{label:"Two implementations of a sort function", asset:_sortClass, filename:"assets/accept-basic/sort.lua"},
+			{test:false, label:"Two implementations of a sort function", asset:_sortClass, filename:"assets/accept-basic/sort.lua"},
 			{label:"Make table, grouping all data for the same item", asset:_tableClass, filename:"assets/accept-basic/table.lua"}, //miss
 			{label:"Trace calls", asset:_traceCallsClass, filename:"assets/accept-basic/trace-calls.lua"}, //miss
 			{label:"Trace assigments to global variables", asset:_traceGlobalsClass, filename:"assets/accept-basic/trace-globals.lua"}, //miss
