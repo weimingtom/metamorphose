@@ -1,7 +1,7 @@
 package com.iteye.weimingtom.metamorphose.launcher
 {
-	import com.iteye.weimingtom.metamorphose.java.PrintStream;
 	import com.iteye.weimingtom.metamorphose.lua.BaseLib;
+	import com.iteye.weimingtom.metamorphose.lua.IOLib;
 	import com.iteye.weimingtom.metamorphose.lua.Lua;
 	import com.iteye.weimingtom.metamorphose.lua.MathLib;
 	import com.iteye.weimingtom.metamorphose.lua.OSLib;
@@ -130,13 +130,15 @@ package com.iteye.weimingtom.metamorphose.launcher
 			log(Lua.RELEASE + "  " + Lua.COPYRIGHT);
 			
 			_L = new Lua();
-			if (_isLoadLib) {
+			if (_isLoadLib) 
+			{
 				BaseLib.open(_L);
 				PackageLib.open(_L);
 				MathLib.open(_L);
 				OSLib.open(_L);
 				StringLib.open(_L);
 				TableLib.open(_L);
+				IOLib.open(_L);
 			}
 		}
 		

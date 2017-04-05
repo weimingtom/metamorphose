@@ -62,7 +62,7 @@ public class Test002 {
 	}
 	
 	private static LuaFile[] _embeddedLuaFiles = {
-		new LuaFile(true, "Bisection method for solving non-linear equations", _bisectClass),
+		new LuaFile(false, "Bisection method for solving non-linear equations", _bisectClass),
 		new LuaFile(false, "Temperature conversion table (celsius to farenheit)", _cfClass),
 		new LuaFile(false, "Echo command line arguments", _echoClass), //miss
 		new LuaFile(false, "Environment variables as automatic global variables", _envClass),
@@ -70,7 +70,7 @@ public class Test002 {
 		new LuaFile(false, "Fibonacci function with cache", _fibClass),
 		new LuaFile(false, "Fibonacci numbers with coroutines and generators", _fibforClass),
 		new LuaFile("Report global variable usage", _globalsClass), //miss
-		new LuaFile("The first program in every language", _helloClass), //miss
+		new LuaFile(true, "The first program in every language", _helloClass), //miss
 		new LuaFile("Conway's Game of Life", _lifeClass),
 		new LuaFile("Bare-bones luac", _luacClass), //miss
 		new LuaFile("An implementation of printf", _printfClass),

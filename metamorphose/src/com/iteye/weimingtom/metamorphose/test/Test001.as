@@ -1,6 +1,7 @@
 package com.iteye.weimingtom.metamorphose.test  
 {
 	import com.iteye.weimingtom.metamorphose.lua.BaseLib;
+	import com.iteye.weimingtom.metamorphose.lua.IOLib;
 	import com.iteye.weimingtom.metamorphose.lua.Lua;
 	import com.iteye.weimingtom.metamorphose.lua.MathLib;
 	import com.iteye.weimingtom.metamorphose.lua.OSLib;
@@ -36,6 +37,7 @@ package com.iteye.weimingtom.metamorphose.test
 					OSLib.open(L);
 					StringLib.open(L);
 					TableLib.open(L);
+					IOLib.open(L);
 				}
 				var status:int = L.doString(test003);
 				if (status != 0)

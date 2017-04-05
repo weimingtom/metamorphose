@@ -21,3 +21,4 @@ var s:String = String(d).toUpperCase(); //d.toPrecision(this._precision);//Strin
 //toPrecision
 var s:String = String(d);//d.toPrecision(this._precision);//String(d); //FIXME:整数转字符串会丢失小数点后1位精度
 19. (TODO) BaseLib.OutputArr is not thread-safe  
+20. (TODO) IOLib

@@ -1,4 +1,4 @@
-/*  $Header: //info.ravenbrook.com/project/jili/version/1.1/code/mnj/lua/MathLib.java#1 $
+/*
  * Copyright (c) 2006 Nokia Corporation and/or its subsidiary(-ies).
  * All rights reserved.
  * 
@@ -103,7 +103,7 @@ public final class IOLib extends LuaJavaCallback
     return pushresult(L, status, null);
   }
   
-  private static int errno;//FIXME: not implemented
+  private static int errno = 0;//FIXME: not implemented
   private static int pushresult(Lua L, int i, String filename) {
 	  int en = errno;  /* calls to Lua API may change this value */
 	  if (i != 0) {
@@ -113,10 +113,12 @@ public final class IOLib extends LuaJavaCallback
 	    L.pushNil();
 	    if (filename != null) {
 	    	//FIXME: not implemented
-	      L.pushString(String.format("%s: %s", filename, "io error"/*strerror(en)*/));
+	      //L.pushString(String.format("%s: %s", filename, "io error"/*strerror(en)*/));
+	    	L.pushString("" + filename + ": " + "io error"/*strerror(en)*/);
 	    } else {
 	    	//FIXME: not implemented
-	      L.pushString(String.format("%s", "io error"/*strerror(en)*/));
+	      //L.pushString(String.format("%s", "io error"/*strerror(en)*/));
+	    	L.pushString("" + "io error"/*strerror(en)*/);
 	    }
 	    L.pushNumber(en);
 	    return 3;

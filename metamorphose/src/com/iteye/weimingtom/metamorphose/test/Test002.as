@@ -1,6 +1,7 @@
 package com.iteye.weimingtom.metamorphose.test
 {
 	import com.iteye.weimingtom.metamorphose.lua.BaseLib;
+	import com.iteye.weimingtom.metamorphose.lua.IOLib;
 	import com.iteye.weimingtom.metamorphose.lua.Lua;
 	import com.iteye.weimingtom.metamorphose.lua.LuaTable;
 	import com.iteye.weimingtom.metamorphose.lua.MathLib;
@@ -54,7 +55,7 @@ package com.iteye.weimingtom.metamorphose.test
 		private static var _xdClass:Class; //miss
 		
 		private static var _embeddedLuaFiles:Array = [
-			{test:true, label:"Bisection method for solving non-linear equations", asset:_bisectClass, filename:"assets/accept-basic/bisect.lua"},
+			{test:false, label:"Bisection method for solving non-linear equations", asset:_bisectClass, filename:"assets/accept-basic/bisect.lua"},
 			{test:false, label:"Temperature conversion table (celsius to farenheit)", asset:_cfClass, filename:"assets/accept-basic/cf.lua"},
 			{test:false, label:"Echo command line arguments", asset:_echoClass, filename:"assets/accept-basic/echo.lua"}, //miss
 			{test:false, label:"Environment variables as automatic global variables", asset:_envClass, filename:"assets/accept-basic/env.lua"},
@@ -62,7 +63,7 @@ package com.iteye.weimingtom.metamorphose.test
 			{test:false, label:"Fibonacci function with cache", asset:_fibClass, filename:"assets/accept-basic/fib.lua"},
 			{test:false, label:"Fibonacci numbers with coroutines and generators", asset:_fibforClass, filename:"assets/accept-basic/fibfor.lua"},
 			{label:"Report global variable usage", asset:_globalsClass, filename:"assets/accept-basic/globals.lua"}, //miss
-			{label:"The first program in every language", asset:_helloClass, filename:"assets/accept-basic/hello.lua"}, //miss
+			{test:true, label:"The first program in every language", asset:_helloClass, filename:"assets/accept-basic/hello.lua"}, //miss
 			{test:false, label:"Conway's Game of Life", asset:_lifeClass, filename:"assets/accept-basic/life.lua"},
 			{label:"Bare-bones luac", asset:_luacClass, filename:"assets/accept-basic/luac.lua"}, //miss
 			{label:"An implementation of printf", asset:_printfClass, filename:"assets/accept-basic/printf.lua"},
@@ -115,6 +116,7 @@ package com.iteye.weimingtom.metamorphose.test
 					OSLib.open(L);
 					StringLib.open(L);
 					TableLib.open(L);
+					IOLib.open(L);
 				}
 				if (useArg) 
 				{
