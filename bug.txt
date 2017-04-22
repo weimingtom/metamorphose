@@ -23,3 +23,7 @@ var s:String = String(d);//d.toPrecision(this._precision);//String(d); //FIXME:æ
 19. (TODO) BaseLib.OutputArr is not thread-safe  
 20. (TODO) IOLib
 21. (TODO) moonshinejs testcase
+22. (TODO) 
+gRunerror("attempt to compare two " + t1 + "values");
+->
+gRunerror("attempt to compare two " + t1 + " values");
