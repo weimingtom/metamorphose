@@ -4,6 +4,8 @@ Project name is from the opening song of 'The Ugly and Beautiful World' (この�
 
 ## Demo  
 https://weimingtom.github.io/metamorphose/  
+Flex demo (WIP):  
+https://weimingtom.github.io/metamorphose/MetamorphoseDemo.html  
 
 ## History  
 2017-02-07: Adding Lua common test cases and Flex project.  
