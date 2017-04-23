@@ -27,3 +27,4 @@ var s:String = String(d);//d.toPrecision(this._precision);//String(d); //FIXME:æ
 gRunerror("attempt to compare two " + t1 + "values");
 ->
 gRunerror("attempt to compare two " + t1 + " values");
+23. (TODO) j2py
