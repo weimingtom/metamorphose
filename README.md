@@ -33,3 +33,5 @@ https://github.com/lua-alchemy/lua-alchemy
 ![Screenshot](/snapshot/launcher_001.png)  
 * Running on Java 6 for Windows   
 ![Screenshot](/snapshot/launcher_002.png)    
+* Flex version demo     
+![Screenshot](/snapshot/flex_001.png)    
