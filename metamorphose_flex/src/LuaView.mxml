@@ -3,9 +3,9 @@
   creationComplete="onCreationComplete()">
   <mx:Script>
     <![CDATA[
-		import com.iteye.weimingtom.metamorphose.java.PrintStream;
 		import com.iteye.weimingtom.metamorphose.lua.BaseLib;
 		import com.iteye.weimingtom.metamorphose.lua.Lua;
+		import com.iteye.weimingtom.metamorphose.lua.LuaTable;
 		import com.iteye.weimingtom.metamorphose.lua.MathLib;
 		import com.iteye.weimingtom.metamorphose.lua.OSLib;
 		import com.iteye.weimingtom.metamorphose.lua.PackageLib;
@@ -93,6 +93,8 @@
 		import mx.effects.Move;
 		import mx.events.CloseEvent;
 		
+		
+		
 		//      private var myLuaAlchemy:LuaAlchemy;
 		private var myMetamorphose:Lua;
 		
@@ -166,7 +168,24 @@
 			//                stack.join("\n") + "\n";
 			//            }
 			//          );
-			PrintStream.init();
+						
+			
+			var argv:Array = [];
+			var filename:String = sampleCodeCB.selectedItem.filename;
+			//FIXME: index may be minus (for example, arg[-1], before script file name)
+			//@see http://www.ttlsa.com/lua/lua-install-and-lua-variable-ttlsa/
+			var narg:int = argv.length;
+			var tbl:LuaTable = myMetamorphose.createTable(narg, narg);
+			myMetamorphose.rawSetI(tbl, 0, filename);
+			for (var i:int = 0; i < narg; i++) 
+			{
+				myMetamorphose.rawSetI(tbl, i + 1, argv[i]);
+			}
+			myMetamorphose.setGlobal("arg", tbl);
+			
+			//PrintStream.init();
+			BaseLib.OutputArr = [];
+			BaseLib.OutputArr.push("");
 			var status:int = myMetamorphose.doString(getCode());
 			var output:String = "";
 //			for (var i:int = 0; i < PrintStream.OutputArr.length; ++i)
@@ -174,7 +193,7 @@
 //				var itemStr:String = PrintStream.OutputArr[i];
 //				output += itemStr;
 //			}
-			output += PrintStream.OutputArr.join("\n");
+			output += BaseLib.OutputArr.join("\n");
 			var outputResult:String = "";
 			if (status != 0)
 			{

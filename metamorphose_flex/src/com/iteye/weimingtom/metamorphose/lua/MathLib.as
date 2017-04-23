@@ -39,7 +39,7 @@ package com.iteye.weimingtom.metamorphose.lua
 	 * (EG <code>acos</code>) and hyperbolic trigonometric functions (EG
 	 * <code>cosh</code>) are not provided.
 	 */
-	public final class MathLib
+	public final class MathLib extends LuaJavaCallback
 	{
 		// Each function in the library corresponds to an instance of
 		// this class which is associated (the 'which' member) with an integer
@@ -94,7 +94,7 @@ package com.iteye.weimingtom.metamorphose.lua
          * @param L  the Lua state in which to execute.
          * @return number of returned parameters, as per convention.
          */
-		public function luaFunction(L:Lua):int
+		override public function luaFunction(L:Lua):int
 		{
 			switch (this._which)
 			{

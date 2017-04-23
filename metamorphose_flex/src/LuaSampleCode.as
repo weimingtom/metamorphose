@@ -46,25 +46,25 @@ package
 		private static var _xdClass:Class; //miss
 
 		private static var _embeddedLuaFiles:Array = [
-			{label:"Bisection method for solving non-linear equations", asset:_bisectClass},
-			{label:"Temperature conversion table (celsius to farenheit)", asset:_cfClass},
-			{label:"Echo command line arguments", asset:_echoClass}, //miss
-			{label:"Environment variables as automatic global variables", asset:_envClass},
-			{label:"Factorial without recursion", asset:_factorialClass},
-			{label:"Fibonacci function with cache", asset:_fibClass},
-			{label:"Fibonacci numbers with coroutines and generators", asset:_fibforClass},
-			{label:"Report global variable usage", asset:_globalsClass}, //miss
-			{label:"The first program in every language", asset:_helloClass}, //miss
-			{label:"Conway's Game of Life", asset:_lifeClass},
-			{label:"Bare-bones luac", asset:_luacClass}, //miss
-			{label:"An implementation of printf", asset:_printfClass},
-			{label:"The sieve of of Eratosthenes programmed with coroutines", asset:_readonlyClass},
-			{label:"Make global variables readonly", asset:_sieveClass},
-			{label:"Two implementations of a sort function", asset:_sortClass},
-			{label:"Make table, grouping all data for the same item", asset:_tableClass}, //miss
-			{label:"Trace calls", asset:_traceCallsClass}, //miss
-			{label:"Trace assigments to global variables", asset:_traceGlobalsClass}, //miss
-			{label:"Hex dump", asset:_xdClass},//miss
+			{label:"Bisection method for solving non-linear equations", asset:_bisectClass, filename:"assets/accept-basic/bisect.lua"},
+			{label:"Temperature conversion table (celsius to farenheit)", asset:_cfClass, filename:"assets/accept-basic/cf.lua"},
+			{label:"Echo command line arguments", asset:_echoClass, filename:"assets/accept-basic/echo.lua"}, //miss
+			{label:"Environment variables as automatic global variables", asset:_envClass, filename:"assets/accept-basic/env.lua"},
+			{label:"Factorial without recursion", asset:_factorialClass, filename:"assets/accept-basic/factorial.lua"},
+			{label:"Fibonacci function with cache", asset:_fibClass, filename:"assets/accept-basic/fib.lua"},
+			{label:"Fibonacci numbers with coroutines and generators", asset:_fibforClass, filename:"assets/accept-basic/fibfor.lua"},
+			{label:"Report global variable usage", asset:_globalsClass, filename:"assets/accept-basic/globals.lua"}, //miss
+			{label:"The first program in every language", asset:_helloClass, filename:"assets/accept-basic/hello.lua"}, //miss
+			{label:"Conway's Game of Life", asset:_lifeClass, filename:"assets/accept-basic/life.lua"},
+			{label:"Bare-bones luac", asset:_luacClass, filename:"assets/accept-basic/luac.lua"}, //miss
+			{label:"An implementation of printf", asset:_printfClass, filename:"assets/accept-basic/printf.lua"},
+			{label:"The sieve of of Eratosthenes programmed with coroutines", asset:_readonlyClass, filename:"assets/accept-basic/readonly.lua"},
+			{label:"Make global variables readonly", asset:_sieveClass, filename:"assets/accept-basic/sieve.lua"},
+			{label:"Two implementations of a sort function", asset:_sortClass, filename:"assets/accept-basic/sort.lua"},
+			{label:"Make table, grouping all data for the same item", asset:_tableClass, filename:"assets/accept-basic/table.lua"}, //miss
+			{label:"Trace calls", asset:_traceCallsClass, filename:"assets/accept-basic/traceCalls.lua"}, //miss
+			{label:"Trace assigments to global variables", asset:_traceGlobalsClass, filename:"assets/accept-basic/traceGlobals.lua"}, //miss
+			{label:"Hex dump", asset:_xdClass, filename:"assets/accept-basic/xd.lua"},//miss
 		];
 		
 		[Bindable]
@@ -80,7 +80,7 @@ package
 				//var luaAsset:ByteArrayAsset = ByteArrayAsset(new luaFile.asset());
 				//var luaString:String = luaAsset.toString();
 				var luaString:String = clsObjToUTF8(new luaFile.asset());
-				sampleCode.addItem({label:luaFile.label, code:luaString});
+				sampleCode.addItem({label:luaFile.label, code:luaString, filename:luaFile.filename});
 			}
 		}
 		

@@ -39,7 +39,7 @@ package com.iteye.weimingtom.metamorphose.java
 		
 		public static function currentTimeMillis():Number
 		{
-			return 0;			
+			return new Date().getTime();			
 		}
 	}
 }

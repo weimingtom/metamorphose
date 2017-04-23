@@ -3024,7 +3024,7 @@ package com.iteye.weimingtom.metamorphose.lua
 			}
 			//TODO:
 			//if (a.getClass != b.getClass())
-			if (getQualifiedClassName(a) == getQualifiedClassName(b))
+			if (getQualifiedClassName(a) != getQualifiedClassName(b))
 			{
 				return false;
 			}
@@ -3051,6 +3051,129 @@ package com.iteye.weimingtom.metamorphose.lua
 		 */
 		private static var NUMOP:Array = new Array(2); //double[]
 
+		public static function getOpcodeName(code:int):String
+		{
+			var name:String = "";
+			switch (code) 
+			{
+				case OP_MOVE: 
+					name = "OP_MOVE"; 
+					break;
+				case OP_LOADK:
+					name = "OP_LOADK"; 
+					break;
+				case OP_LOADBOOL:
+					name = "OP_LOADBOOL"; 
+					break;
+				case OP_LOADNIL:
+					name = "OP_LOADNIL"; 
+					break;
+				case OP_GETUPVAL:
+					name = "OP_GETUPVAL"; 
+					break;
+				case OP_GETGLOBAL:
+					name = "OP_GETGLOBAL"; 
+					break;
+				case OP_GETTABLE:
+					name = "OP_GETTABLE"; 
+					break;
+				case OP_SETGLOBAL:
+					name = "OP_SETGLOBAL"; 
+					break;
+				case OP_SETUPVAL:
+					name = "OP_SETUPVAL"; 
+					break;
+				case OP_SETTABLE:
+					name = "OP_SETTABLE"; 
+					break;
+				case OP_NEWTABLE:
+					name = "OP_NEWTABLE"; 
+					break;
+				case OP_SELF:
+					name = "OP_SELF"; 
+					break;
+				case OP_ADD:
+					name = "OP_ADD"; 
+					break;
+				case OP_SUB:
+					name = "OP_SUB"; 
+					break;
+				case OP_MUL:
+					name = "OP_MUL"; 
+					break;
+				case OP_DIV:
+					name = "OP_DIV"; 
+					break;
+				case OP_MOD:
+					name = "OP_MOD"; 
+					break;
+				case OP_POW:
+					name = "OP_POW"; 
+					break;
+				case OP_UNM:
+					name = "OP_UNM"; 
+					break;
+				case OP_NOT:
+					name = "OP_NOT"; 
+					break;
+				case OP_LEN:
+					name = "OP_LEN"; 
+					break;
+				case OP_CONCAT:
+					name = "OP_CONCAT"; 
+					break;
+				case OP_JMP:
+					name = "OP_JMP"; 
+					break;
+				case OP_EQ:
+					name = "OP_EQ"; 
+					break;
+				case OP_LT:
+					name = "OP_LT"; 
+					break;
+				case OP_LE:
+					name = "OP_LE"; 
+					break;
+				case OP_TEST:
+					name = "OP_TEST"; 
+					break;
+				case OP_TESTSET:
+					name = "OP_TESTSET"; 
+					break;
+				case OP_CALL:
+					name = "OP_CALL"; 
+					break;
+				case OP_TAILCALL:
+					name = "OP_TAILCALL"; 
+					break;
+				case OP_RETURN:
+					name = "OP_RETURN"; 
+					break;
+				case OP_FORLOOP:
+					name = "OP_FORLOOP"; 
+					break;
+				case OP_FORPREP:
+					name = "OP_FORPREP"; 
+					break;
+				case OP_TFORLOOP:
+					name = "OP_TFORLOOP"; 
+					break;
+				case OP_SETLIST:
+					name = "OP_SETLIST"; 
+					break;
+				case OP_CLOSE:
+					name = "OP_CLOSE"; 
+					break;
+				case OP_CLOSURE:
+					name = "OP_CLOSURE"; 
+					break;
+				case OP_VARARG:
+					name = "OP_VARARG"; 
+					break;
+			}
+			return name;
+		}
+		
 		/** The core VM execution engine. */
 		private function vmExecute(nexeccalls:int):void
 		{
@@ -3068,6 +3191,19 @@ package com.iteye.weimingtom.metamorphose.lua
 				var k:Array = proto.constant; //Slot[] 
 				var pc:int = this._savedpc;
 
+				
+				//20170402:added
+				if (D) 
+				{
+					//usage:luac -l cf.lua
+					for (var i_test:int = 0; i_test < code.length; i_test++) 
+					{
+						var name1:String = getOpcodeName(OPCODE(code[i_test]));
+						trace(">>>OPCODE(code(" + (i_test + 1) + ")) == " + name1);
+					}
+				}				
+				
+				
 				while (true)        // main loop of interpreter
 				{
 					
@@ -3095,6 +3231,12 @@ package com.iteye.weimingtom.metamorphose.lua
 					var rb:Slot;
 					var rc:Slot;
 						
+					//20170402:added
+					if (D) 
+					{
+						var name2:String = getOpcodeName(OPCODE(i));
+						trace(">>>pc == " + pc + ", name == " + name2);
+					}
 
 					switch (OPCODE(i))
 					{
@@ -3109,7 +3251,7 @@ package com.iteye.weimingtom.metamorphose.lua
 							if (D) 
 							{
 								trace("OP_LOADK:stack[" + (this._base+a) + 
-									"]=k[" + ARGBx(i) + "]=" + k[ARGBx(i)].d);
+									"]=k[" + ARGBx(i) + "]=" + (k[ARGBx(i)] as Slot).d);
 							}
 							continue;
 				  
@@ -3459,9 +3601,9 @@ package com.iteye.weimingtom.metamorphose.lua
 							{
 								var b_CALL:int = ARGB(i);
 								var nresults:int = ARGC(i) - 1;
-								if (b != 0)
+								if (b_CALL != 0) //FIXME:bug: b->b_CALL
 								{
-									stacksetsize(this._base + a + b);
+									stacksetsize(this._base + a + b_CALL);
 								}
 								this._savedpc = pc;
 								switch (vmPrecall(this._base + a, nresults))
@@ -4220,6 +4362,14 @@ package com.iteye.weimingtom.metamorphose.lua
 				if (Lua.D)
 				{
 					trace("stacksetsize:" + n);
+				}
+			}
+			//20170402:added
+			if (n == 7)
+			{
+				if (Lua.D)
+				{
+					trace(">>>stacksetsize:" + n);
 				}
 			}
 			// It is absolutely critical that when the stack changes sizes those

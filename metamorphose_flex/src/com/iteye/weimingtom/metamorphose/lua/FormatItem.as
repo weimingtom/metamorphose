@@ -338,7 +338,8 @@ flag:
 				d *= 1e10;
 				offset = 10;
 			}
-			var s:String = d.toPrecision(this._precision);//String(d); //FIXME:整数转浮点问题
+			//FIXME:如果使用toPrecision会消除掉中间的e指数符号
+			var s:String = String(d).toUpperCase(); //d.toPrecision(this._precision);//String(d); //FIXME:整数转浮点问题
 			var t:StringBuffer = new StringBuffer(s);
 			var e:int;      // Exponent value
 			if (d == 0)

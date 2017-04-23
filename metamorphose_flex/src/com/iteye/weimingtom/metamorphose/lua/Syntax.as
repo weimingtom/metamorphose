@@ -1889,7 +1889,7 @@ package com.iteye.weimingtom.metamorphose.lua
 		{
 			var f:Proto = this._fs.f;
 			f.ensureLocvars(this._L, this._fs.nlocvars, /*Short*/int.MAX_VALUE) ; //TODO:
-			f.locvars[this._fs.nlocvars].varname = varname;
+			(f.locvars[this._fs.nlocvars] as LocVar).varname = varname;
 			return this._fs.nlocvars++;
 		}
 

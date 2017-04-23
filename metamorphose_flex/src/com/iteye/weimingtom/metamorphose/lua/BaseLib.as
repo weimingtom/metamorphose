@@ -116,6 +116,8 @@ package com.iteye.weimingtom.metamorphose.lua
 		public function BaseLib(which:int)
 		{
 			this.which = which;
+			OutputArr = new Array();
+			OutputArr.push("");
 		}
 
 		/** Instance constructor used by coroutine.wrap. */
@@ -593,7 +595,8 @@ package com.iteye.weimingtom.metamorphose.lua
 		 * their own instance which sent output to the screen of a JME device.
 		 */
 		public static var OUT:PrintStream = SystemUtil.out;
-
+		public static var OutputArr:Array;
+		
 		/** Implements print. */
 		private static function print(L:Lua):int
 		{
@@ -609,13 +612,16 @@ package com.iteye.weimingtom.metamorphose.lua
 				{
 					return L.error("'tostring' must return a string to 'print'");
 				}
-				if (i>1)
+				if (i > 1)
 				{
+					OutputArr[OutputArr.length - 1] += "\t";
 					OUT.print('\t');
 				}
+				OutputArr[OutputArr.length - 1] += s;
 				OUT.print(s);
 				L.pop(1);
 			}
+			OutputArr.push("");
 			OUT.println();
 			return 0;
 		}

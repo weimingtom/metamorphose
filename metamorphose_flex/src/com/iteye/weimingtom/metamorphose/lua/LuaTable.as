@@ -30,6 +30,7 @@ package com.iteye.weimingtom.metamorphose.lua
 {
 	import com.iteye.weimingtom.metamorphose.java.Enumeration;
 	import com.iteye.weimingtom.metamorphose.java.Hashtable;
+	import com.iteye.weimingtom.metamorphose.java.IllegalArgumentException;
 	import com.iteye.weimingtom.metamorphose.java.SystemUtil;
 	
 	/**
@@ -567,7 +568,7 @@ package com.iteye.weimingtom.metamorphose.lua
 		 */
 		override public function _get(key:Object):Object
 		{
-			throw new Error("IllegalArgumentException");
+			throw new IllegalArgumentException();
 		}
 
 		override public function keys():Enumeration
@@ -582,7 +583,7 @@ package com.iteye.weimingtom.metamorphose.lua
 		 */
 		override public function put(key:Object, value:Object):Object
 		{
-			throw new Error("IllegalArgumentException");
+			throw new IllegalArgumentException();
 		}
 		  
 		/**
