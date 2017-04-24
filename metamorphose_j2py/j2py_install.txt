@@ -1,0 +1,7 @@
+https://github.com/natural/java2python/tree/b8037561c542522ae620e0a071ecc7e668461587
+Commits on May 10, 2016
+
+$ cd antlr-3.1.3/runtime/Python/
+$ sudo python setup.py install
+$ cd java2python
+$ sudo python setup.py install
