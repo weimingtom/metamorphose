@@ -1,5 +1,6 @@
-﻿# metamorphose
+# metamorphose
 Porting jill (Lua on Java) to ActionScript 3.   
+https://github.com/Ravenbrook/jill  
 Project name is from the opening song of 'The Ugly and Beautiful World' (この醜くも美しい世界).   
 
 ## Demo  
@@ -21,6 +22,7 @@ https://weimingtom.github.io/metamorphose/MetamorphoseDemo.html
 ## References  
 * jill  
 http://code.google.com/p/jillcode/  
+https://github.com/Ravenbrook/jill  
 * Lua 5.1.4  
 http://lua.org/ftp  
 * jillian  
