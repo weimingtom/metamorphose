@@ -28,3 +28,4 @@ gRunerror("attempt to compare two " + t1 + "values");
 ->
 gRunerror("attempt to compare two " + t1 + " values");
 23. (TODO) j2py
+24. (TODO) copyright
