@@ -17,6 +17,11 @@
 * lua_bench-0.1  
 	llvm-lua  
 
+* openresty/luajit2-test-suite  
+	https://github.com/openresty/luajit2-test-suite  
+
+
+
 # Other  
 * https://github.com/adamwiggins/lua-pong  
 * https://github.com/lichuang/Lua-Source-Internal  
