@@ -84,7 +84,7 @@ public class Test001 {
 			}
 			
 			
-			int status = L.doString(test008);
+			int status = L.doString(test001);
 			if (status != 0) {
 				Object errObj = L.value(1);
 			    Object tostring = L.getGlobal("tostring");
