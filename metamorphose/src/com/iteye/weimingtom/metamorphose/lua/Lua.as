@@ -3195,7 +3195,7 @@ package com.iteye.weimingtom.metamorphose.lua
 				//20170402:added
 				if (D) 
 				{
-					//usage:luac -l cf.lua
+					//usage:luac -p -l cf.lua
 					for (var i_test:int = 0; i_test < code.length; i_test++) 
 					{
 						var name1:String = getOpcodeName(OPCODE(code[i_test]));

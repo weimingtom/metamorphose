@@ -3130,7 +3130,7 @@ reentry:
 
       //20170402:added
       if (D) {
-	      //usage:luac -l cf.lua
+	      //usage:luac -p -l cf.lua
 	      for (int i_test = 0; i_test < code.length; i_test++) {
 	    	  String name1 = getOpcodeName(OPCODE(code[i_test]));
 	    	  System.err.println(">>>OPCODE(code(" + (i_test + 1) + ")) == " + name1);
