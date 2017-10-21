@@ -5,7 +5,7 @@ Project name is from the opening song of 'The Ugly and Beautiful World' (この�
 
 ## Demo  
 https://weimingtom.github.io/metamorphose/  
-Flex demo (WIP):  
+Flex demo (WIP, from lua-alchemy demo):  
 https://weimingtom.github.io/metamorphose/MetamorphoseDemo.html  
 
 ## History  
@@ -35,5 +35,5 @@ https://github.com/lua-alchemy/lua-alchemy
 ![Screenshot](/snapshot/launcher_001.png)  
 * Running on Java 6 for Windows   
 ![Screenshot](/snapshot/launcher_002.png)    
-* Flex version demo     
+* Flex version demo (from lua-alchemy demo)      
 ![Screenshot](/snapshot/flex_001.png)    
